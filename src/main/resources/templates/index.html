@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'home')}">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of Vets</title>
+</head>
+<body>
+<!--/*@thymesVar id="baseUser" type="com.timezone.demo.model.BaseUser"*/-->
+<h2>Veterinarians</h2>
+
+<table id="vets" class="table table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Specialties</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="baseUser : ${baseUser}">
+        <td th:text="${baseUser.fistName + ' ' + baseUser.lastName}"></td>
+        <td><span th:each="baseClient : ${baseUser.baseClient}"
+                  th:text="${baseClient.companyNamy + ' '}" /> <span
+                th:if="${baseUser?.baseClients?.size() == 0}">none</span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
