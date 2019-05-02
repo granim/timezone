@@ -36,10 +36,10 @@ public class BaseUser extends Person{
     @Column(name = "telephone")
     private String telephone;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "baseuser")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "baseuser", fetch = FetchType.EAGER)
     private Set<BaseClient> baseClients = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "baseuser")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "baseuser", fetch = FetchType.EAGER)
     private Set<Coworker> coworkers = new HashSet<>();
 
     public BaseClient getBaseClient(String name) {
