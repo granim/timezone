@@ -1,7 +1,7 @@
 package com.timezone.demo.controllers;
 
-import com.timezone.demo.Model.BaseUser;
-import com.timezone.demo.Services.BaseUserService;
+import com.timezone.demo.model.BaseUser;
+import com.timezone.demo.services.BaseUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -66,7 +66,7 @@ public class BaseUserController {
         return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
     }
 
-    @GetMapping("/new")
+    @PostMapping("/new")
     public String processCreationForm(@Valid BaseUser baseUser, BindingResult result){
         if(result.hasErrors()) {
             return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;

@@ -1,6 +1,6 @@
-package com.timezone.demo.Services.map;
+package com.timezone.demo.services.map;
 
-import com.timezone.demo.Model.BaseEntity;
+import com.timezone.demo.model.BaseEntity;
 
 import java.util.*;
 

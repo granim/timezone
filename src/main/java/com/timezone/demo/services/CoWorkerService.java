@@ -1,6 +1,6 @@
-package com.timezone.demo.Services;
+package com.timezone.demo.services;
 
-import com.timezone.demo.Model.Coworker;
+import com.timezone.demo.model.Coworker;
 import org.springframework.stereotype.Service;
 
 @Service

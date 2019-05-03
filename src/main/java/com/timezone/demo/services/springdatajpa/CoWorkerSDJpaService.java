@@ -1,8 +1,8 @@
-package com.timezone.demo.Services.springdatajpa;
+package com.timezone.demo.services.springdatajpa;
 
-import com.timezone.demo.Model.Coworker;
-import com.timezone.demo.Repositories.CoWorkerRepository;
-import com.timezone.demo.Services.CoWorkerService;
+import com.timezone.demo.model.Coworker;
+import com.timezone.demo.repositories.CoWorkerRepository;
+import com.timezone.demo.services.CoWorkerService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 

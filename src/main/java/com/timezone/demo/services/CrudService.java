@@ -1,4 +1,4 @@
-package com.timezone.demo.Services;
+package com.timezone.demo.services;
 
 import java.util.Set;
 

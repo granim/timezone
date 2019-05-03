@@ -1,9 +1,9 @@
 package com.timezone.demo.bootstrap;
 
-import com.timezone.demo.Model.BaseUser;
-import com.timezone.demo.Repositories.ClientRepository;
-import com.timezone.demo.Repositories.CoWorkerRepository;
-import com.timezone.demo.Repositories.UserRepository;
+import com.timezone.demo.model.BaseUser;
+import com.timezone.demo.repositories.ClientRepository;
+import com.timezone.demo.repositories.CoWorkerRepository;
+import com.timezone.demo.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;

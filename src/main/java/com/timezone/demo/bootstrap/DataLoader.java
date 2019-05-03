@@ -1,11 +1,10 @@
 package com.timezone.demo.bootstrap;
 
-import com.timezone.demo.Model.BaseClient;
-import com.timezone.demo.Model.BaseUser;
-import com.timezone.demo.Model.Coworker;
-import com.timezone.demo.Services.BaseClientService;
-import com.timezone.demo.Services.BaseUserService;
-import com.timezone.demo.Services.CoWorkerService;
+import com.timezone.demo.model.BaseClient;
+import com.timezone.demo.model.BaseUser;
+import com.timezone.demo.services.BaseClientService;
+import com.timezone.demo.services.BaseUserService;
+import com.timezone.demo.services.CoWorkerService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -32,11 +31,21 @@ public class DataLoader implements CommandLineRunner {
         user1.setAddress("23424 sdfsfds");
         user1.setLastName("hhh");
         user1.setFirstName("jojo");
+
+        BaseClient client1 = new BaseClient();
+        client1.setTelephone("234234");
+        client1.setCompanyName("Taldo");
+        client1.setCity("Des");
+        client1.setAddress("dsfsfdsf 2342");
+        client1.setBaseuser(user1);
+        baseClientService.save(client1);
+        user1.getBaseClients().add(client1);
+
         baseUserService.save(user1);
 
-
         System.out.println("--------------------------------------Loaded Users--------------------------------------");
-
+        System.out.println(user1.getBaseClients());
+        System.out.println(client1.getCompanyName());
     }
 
 

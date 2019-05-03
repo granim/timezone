@@ -1,12 +1,11 @@
-package com.timezone.demo.Services.map;
+package com.timezone.demo.services.map;
 
-import com.timezone.demo.Model.BaseClient;
-import com.timezone.demo.Model.BaseUser;
-import com.timezone.demo.Model.Coworker;
-import com.timezone.demo.Services.BaseClientService;
-import com.timezone.demo.Services.BaseUserService;
-import com.timezone.demo.Services.CoWorkerService;
-import org.apache.tomcat.jni.User;
+import com.timezone.demo.model.BaseClient;
+import com.timezone.demo.model.BaseUser;
+import com.timezone.demo.model.Coworker;
+import com.timezone.demo.services.BaseClientService;
+import com.timezone.demo.services.BaseUserService;
+import com.timezone.demo.services.CoWorkerService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -65,7 +64,7 @@ public class BaseUserMapService extends AbstractMapService<BaseUser, Long> imple
                 }
                 if(object.getBaseClients() != null) {
                     object.getBaseClients().forEach(baseClient -> {
-                        if(baseClient.getId() == null) {
+                        if(baseClient.getId() != null) {
                             BaseClient savedClient = baseClientService.save(baseClient);
                             baseClient.setId(savedClient.getId());
                         } else {

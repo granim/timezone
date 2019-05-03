@@ -1,4 +1,4 @@
-package com.timezone.demo.Model;
+package com.timezone.demo.model;
 
 import lombok.*;
 
@@ -31,8 +31,19 @@ public class BaseClient extends BaseEntity {
     @Column(name = "telephone")
     private String telephone;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "baseuser_id")
     private BaseUser baseuser;
 
+
+    @Override
+    public String toString() {
+        return "BaseClient{" +
+                "companyName='" + companyName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", baseuser=" + baseuser +
+                '}';
+    }
 }

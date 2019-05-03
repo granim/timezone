@@ -1,9 +1,9 @@
 package com.timezone.demo.controllers;
 
-import com.timezone.demo.Model.BaseClient;
-import com.timezone.demo.Model.BaseUser;
-import com.timezone.demo.Services.BaseClientService;
-import com.timezone.demo.Services.BaseUserService;
+import com.timezone.demo.model.BaseClient;
+import com.timezone.demo.model.BaseUser;
+import com.timezone.demo.services.BaseClientService;
+import com.timezone.demo.services.BaseUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -38,7 +38,7 @@ public class BaseClientController {
         dataBinder.setDisallowedFields("id");
     }
 
-    @GetMapping("/baseUser/new")
+    @GetMapping("/baseClient/new")
     public String initCreationForm(BaseUser baseUser, Model model) {
         BaseClient baseClient = new BaseClient();
         baseUser.getBaseClients().add(baseClient);

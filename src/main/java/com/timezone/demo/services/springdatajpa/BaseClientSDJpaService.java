@@ -1,8 +1,8 @@
-package com.timezone.demo.Services.springdatajpa;
+package com.timezone.demo.services.springdatajpa;
 
-import com.timezone.demo.Model.BaseClient;
-import com.timezone.demo.Repositories.ClientRepository;
-import com.timezone.demo.Services.BaseClientService;
+import com.timezone.demo.model.BaseClient;
+import com.timezone.demo.repositories.ClientRepository;
+import com.timezone.demo.services.BaseClientService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 

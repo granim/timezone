@@ -1,6 +1,6 @@
-package com.timezone.demo.Repositories;
+package com.timezone.demo.repositories;
 
-import com.timezone.demo.Model.BaseUser;
+import com.timezone.demo.model.BaseUser;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

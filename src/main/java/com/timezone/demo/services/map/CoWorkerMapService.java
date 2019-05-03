@@ -1,7 +1,7 @@
-package com.timezone.demo.Services.map;
+package com.timezone.demo.services.map;
 
-import com.timezone.demo.Model.Coworker;
-import com.timezone.demo.Services.CoWorkerService;
+import com.timezone.demo.model.Coworker;
+import com.timezone.demo.services.CoWorkerService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 

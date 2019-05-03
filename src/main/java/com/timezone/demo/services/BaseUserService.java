@@ -1,6 +1,6 @@
-package com.timezone.demo.Services;
+package com.timezone.demo.services;
 
-import com.timezone.demo.Model.BaseUser;
+import com.timezone.demo.model.BaseUser;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

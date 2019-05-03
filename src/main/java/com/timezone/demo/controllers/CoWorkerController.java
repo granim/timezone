@@ -1,10 +1,9 @@
 package com.timezone.demo.controllers;
 
-import com.timezone.demo.Model.BaseClient;
-import com.timezone.demo.Model.BaseUser;
-import com.timezone.demo.Model.Coworker;
-import com.timezone.demo.Services.BaseUserService;
-import com.timezone.demo.Services.CoWorkerService;
+import com.timezone.demo.model.BaseUser;
+import com.timezone.demo.model.Coworker;
+import com.timezone.demo.services.BaseUserService;
+import com.timezone.demo.services.CoWorkerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;

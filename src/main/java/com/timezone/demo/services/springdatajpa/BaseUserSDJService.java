@@ -1,14 +1,13 @@
-package com.timezone.demo.Services.springdatajpa;
+package com.timezone.demo.services.springdatajpa;
 
-import com.timezone.demo.Model.BaseUser;
-import com.timezone.demo.Repositories.ClientRepository;
-import com.timezone.demo.Repositories.CoWorkerRepository;
-import com.timezone.demo.Repositories.UserRepository;
-import com.timezone.demo.Services.BaseUserService;
+import com.timezone.demo.model.BaseUser;
+import com.timezone.demo.repositories.ClientRepository;
+import com.timezone.demo.repositories.CoWorkerRepository;
+import com.timezone.demo.repositories.UserRepository;
+import com.timezone.demo.services.BaseUserService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import java.security.acl.Owner;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

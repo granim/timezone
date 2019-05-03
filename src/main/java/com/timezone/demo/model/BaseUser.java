@@ -1,4 +1,4 @@
-package com.timezone.demo.Model;
+package com.timezone.demo.model;
 
 
 import lombok.*;
@@ -11,7 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users")
+@Table(name = "baseusers")
 public class BaseUser extends Person{
 
     @Builder
@@ -77,6 +77,8 @@ public class BaseUser extends Person{
         }
         return null;
     }
+
+
 
 
 }
