@@ -1,7 +1,7 @@
 package com.timezone.demo.controllers;
 
 import com.timezone.demo.model.BaseClient;
-import com.timezone.demo.model.BaseUser;
+import com.timezone.demo.model.Worker;
 import com.timezone.demo.services.BaseClientService;
 import com.timezone.demo.services.BaseUserService;
 import org.springframework.stereotype.Controller;
@@ -29,36 +29,36 @@ public class BaseClientController {
     }
 
     @ModelAttribute("baseUser")
-    public BaseUser findBaseUser(@PathVariable("baseUserId") Long baseUserId) {
+    public Worker findBaseUser(@PathVariable("baseUserId") Long baseUserId) {
         return baseUserService.findById(baseUserId);
     }
 
-    @InitBinder("baseUser")
+    @InitBinder("workers")
     public void initBaseUserBinder(WebDataBinder dataBinder){
         dataBinder.setDisallowedFields("id");
     }
 
     @GetMapping("/baseClient/new")
-    public String initCreationForm(BaseUser baseUser, Model model) {
+    public String initCreationForm(Worker Worker, Model model) {
         BaseClient baseClient = new BaseClient();
-        baseUser.getBaseClients().add(baseClient);
-        baseClient.setBaseuser(baseUser);
+        Worker.getBaseClients().add(baseClient);
+        baseClient.setBaseuser(Worker);
         model.addAttribute("baseClient", baseClient);
         return VIEWS_BASECLIENT_CREATE_OR_UPDATE_FORM;
     }
 
     @PostMapping("baseClient/new")
-    public String processCreationForm(BaseUser baseUser, @Valid BaseClient baseClient, BindingResult result, ModelMap model){
-        if (StringUtils.hasLength(baseClient.getCompanyName()) && baseClient.isNew() && baseUser.getBaseClient(baseClient.getCompanyName(), true) != null){
+    public String processCreationForm(Worker Worker, @Valid BaseClient baseClient, BindingResult result, ModelMap model){
+        if (StringUtils.hasLength(baseClient.getCompanyName()) && baseClient.isNew() && Worker.getBaseClient(baseClient.getCompanyName(), true) != null){
             result.rejectValue("name", "duplicate", "already exists");
         }
-        baseUser.getBaseClients().add(baseClient);
+        Worker.getBaseClients().add(baseClient);
         if(result.hasErrors()) {
             model.put("baseClient", baseClient);
             return VIEWS_BASECLIENT_CREATE_OR_UPDATE_FORM;
         } else {
             baseClientService.save(baseClient);
-            return "redirect:/baseUser/" + baseUser.getId();
+            return "redirect:/baseUser/" + Worker.getId();
         }
     }
     @GetMapping("baseClient/{baseClientId}/edit")
@@ -68,13 +68,13 @@ public class BaseClientController {
     }
 
     @PostMapping("/baseClient/{baseClientId}/edit")
-    public String processUpdateForm(@Valid BaseClient baseClient, BindingResult result, BaseUser baseUser, Model model) {
+    public String processUpdateForm(@Valid BaseClient baseClient, BindingResult result, Worker Worker, Model model) {
         if(result.hasErrors()) {
-            baseClient.setBaseuser(baseUser);
+            baseClient.setBaseuser(Worker);
             model.addAttribute("baseClient", baseClient);
             return VIEWS_BASECLIENT_CREATE_OR_UPDATE_FORM;
         } else {
-            baseUser.getBaseClients().add(baseClient);
+            Worker.getBaseClients().add(baseClient);
             baseClientService.save(baseClient);
             return "redirect:/baseUser/" + baseClient.getId();
         }

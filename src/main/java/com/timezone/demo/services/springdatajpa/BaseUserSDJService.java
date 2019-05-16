@@ -1,6 +1,6 @@
 package com.timezone.demo.services.springdatajpa;
 
-import com.timezone.demo.model.BaseUser;
+import com.timezone.demo.model.Worker;
 import com.timezone.demo.repositories.ClientRepository;
 import com.timezone.demo.repositories.CoWorkerRepository;
 import com.timezone.demo.repositories.UserRepository;
@@ -27,34 +27,34 @@ public class BaseUserSDJService implements BaseUserService {
     }
 
     @Override
-    public BaseUser findByLastName(String lastName) {
+    public Worker findByLastName(String lastName) {
         return userRepository.findByLastName(lastName);
     }
 
     @Override
-    public List<BaseUser> findAllByLastName(String lastName) {
-        return userRepository.findAllByLastName(lastName);
+    public List<Worker> findAllByLastNameLike(String lastName) {
+        return userRepository.findAllByLastNameLike(lastName);
     }
 
     @Override
-    public Set<BaseUser> findAll() {
-        Set<BaseUser> users = new HashSet<>();
-        userRepository.findAll().forEach(users::add);
-        return users;
+    public Set<Worker> findAll() {
+        Set<Worker> Worker = new HashSet<>();
+        userRepository.findAll().forEach(Worker::add);
+        return Worker;
     }
 
     @Override
-    public BaseUser findById(Long aLong) {
+    public Worker findById(Long aLong) {
         return userRepository.findById(aLong).orElse(null);
     }
 
     @Override
-    public BaseUser save(BaseUser object) {
+    public Worker save(Worker object) {
         return userRepository.save(object);
     }
 
     @Override
-    public void delete(BaseUser object) {
+    public void delete(Worker object) {
         userRepository.delete(object);
     }
 

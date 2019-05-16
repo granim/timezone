@@ -5,24 +5,22 @@
     <title>List of Vets</title>
 </head>
 <body>
-<!--/*@thymesVar id="baseUser" type="com.timezone.demo.model.BaseUser"*/-->
-<h2>Veterinarians</h2>
+<!--/*@thymesVar id="Worker" type="com.timezone.demo.model.Worker"*/-->
+<h2>Workers</h2>
 
-<table id="vets" class="table table-striped">
-    <thead>
+<table class="glyphicon glyphicon-calendar">
     <tr>
+        <th>Id</th>
         <th>Name</th>
-        <th>Specialties</th>
+        <th>Age</th>
     </tr>
-    </thead>
-    <tbody>
-    <tr th:each="baseUser : ${baseUser}">
-        <td th:text="${baseUser.fistName + ' ' + baseUser.lastName}"></td>
-        <td><span th:each="baseClient : ${baseUser.baseClient}"
-                  th:text="${baseClient.companyNamy + ' '}" /> <span
-                th:if="${baseUser?.baseClients?.size() == 0}">none</span></td>
+    <tr th:each="worker : ${workers}">
+        <td th:text="${worker.id}"></td>
+        <td th:text="${worker.getFirstName()}"></td>
+        <td th:text="${worker.getLastName()}"></td>
+        <td th:text="${worker.getAddress()}"></td>
+        <td th:text="${worker.getBaseClients()}"></td>
     </tr>
-    </tbody>
 </table>
 </body>
 </html>

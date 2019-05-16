@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Workers</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div th:if="${not #lists.isEmpty(workers)}">
+    <h2>Person List</h2>
+    <table class="glyphicon glyphicon-calendar">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+        <tr th:each="worker : ${workers}">
+            <td th:text="${worker.id}"></td>
+            <td th:text="${worker.getFirstName()}"></td>
+            <td th:text="${worker.getLastName()}"></td>
+            <td th:text="${worker.getAddress()}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

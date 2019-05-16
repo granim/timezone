@@ -12,10 +12,10 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "baseusers")
-public class BaseUser extends Person{
+public class Worker extends Person{
 
     @Builder
-    public BaseUser(Long id, String firstName, String lastName, String address, String city, String telephone, Set<BaseClient> baseClients, Set<Coworker> coworkers) {
+    public Worker(Long id, String firstName, String lastName, String address, String city, String telephone, Set<BaseClient> baseClients, Set<Coworker> coworkers) {
         super(id, firstName, lastName);
         this.address = address;
         this.city = city;

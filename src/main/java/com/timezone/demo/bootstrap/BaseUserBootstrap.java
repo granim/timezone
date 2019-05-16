@@ -1,6 +1,8 @@
 package com.timezone.demo.bootstrap;
 
-import com.timezone.demo.model.BaseUser;
+import com.timezone.demo.model.BaseClient;
+import com.timezone.demo.model.Worker;
+import com.timezone.demo.model.Coworker;
 import com.timezone.demo.repositories.ClientRepository;
 import com.timezone.demo.repositories.CoWorkerRepository;
 import com.timezone.demo.repositories.UserRepository;
@@ -30,30 +32,56 @@ public class BaseUserBootstrap implements ApplicationListener<ContextRefreshedEv
         this.coWorkerRepository = coWorkerRepository;
     }
 
-
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         System.out.println("BootStrap");
         userRepository.saveAll(getBaseUsers());
+
     }
 
-    private List<BaseUser> getBaseUsers(){
+    private List<Worker> getBaseUsers(){
 
-        List<BaseUser> users = new ArrayList<>(1);
+        List<Worker> Worker = new ArrayList<>(1);
 
-        BaseUser userOne = new BaseUser();
+        Worker userOne = new Worker();
         userOne.setFirstName("Grat");
         userOne.setLastName("Mur");
         userOne.setAddress("sdfsd 234234");
         userOne.setCity("IO");
         userOne.setTelephone("56++5+5564564");
 
-        users.add(userOne);
-        return users;
+        Worker userTwo = new Worker();
+        userTwo.setFirstName("Martha");
+        userTwo.setLastName("Zelma");
+        userTwo.setAddress("156 St low rd");
+        userTwo.setCity("Dalles");
+        userTwo.setTelephone("345354");
+
+
+        Coworker worker1 = new Coworker();
+        worker1.setBaseuser(userOne);
+        worker1.setAddress("456 sfdsfd");
+        worker1.setCity("Orlando");
+        worker1.setTelephone("456 456");
+        worker1.setFirstName("Jim");
+        worker1.setLastName("Joe");
+
+        BaseClient client1 = new BaseClient();
+        client1.setBaseuser(userOne);
+        client1.setAddress("45614s");
+        client1.setCity("Melbourne");
+        client1.setCompanyName("HARgeset");
+        client1.setTelephone("123567");
+
+
+        userOne.getCoworkers().add(worker1);
+        userOne.getBaseClients().add(client1);
+
+        Worker.add(userOne);
+        Worker.add(userTwo);
+        return Worker;
+
     }
-
-
-
 
 }

@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class BaseClient extends BaseEntity {
 
     @Builder
-    public BaseClient(Long id, String companyName, String address, String city, String telephone, BaseUser baseuser) {
+    public BaseClient(Long id, String companyName, String address, String city, String telephone, Worker baseuser) {
         super(id);
         this.companyName = companyName;
         this.address = address;
@@ -33,7 +33,7 @@ public class BaseClient extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "baseuser_id")
-    private BaseUser baseuser;
+    private Worker baseuser;
 
 
     @Override
@@ -43,7 +43,7 @@ public class BaseClient extends BaseEntity {
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", telephone='" + telephone + '\'' +
-                ", baseuser=" + baseuser +
+                ", workers=" + baseuser +
                 '}';
     }
 }

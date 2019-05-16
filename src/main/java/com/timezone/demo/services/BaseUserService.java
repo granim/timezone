@@ -1,13 +1,12 @@
 package com.timezone.demo.services;
 
-import com.timezone.demo.model.BaseUser;
-import org.springframework.stereotype.Service;
+import com.timezone.demo.model.Worker;
+
 
 import java.util.List;
-@Service
-public interface BaseUserService extends CrudService<BaseUser, Long>{
-    BaseUser findByLastName(String lastName);
 
-    List<BaseUser> findAllByLastName(String lastName);
+public interface BaseUserService extends CrudService<Worker, Long>{
+    Worker findByLastName(String lastName);
 
+    List<Worker> findAllByLastNameLike(String lastName);
 }

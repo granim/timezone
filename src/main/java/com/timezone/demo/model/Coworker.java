@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Coworker extends Person {
 
     @Builder
-    public Coworker(Long id, String firstName, String lastName, String address, String city, String telephone, BaseUser baseuser) {
+    public Coworker(Long id, String firstName, String lastName, String address, String city, String telephone, Worker baseuser) {
         super(id, firstName, lastName);
         this.address = address;
         this.city = city;
@@ -31,6 +31,13 @@ public class Coworker extends Person {
 
     @ManyToOne
     @JoinColumn(name = "baseuser_id")
-    private BaseUser baseuser;
+    private Worker baseuser;
 
+    @Override
+    public String toString() {
+        return  getFirstName() + " " +
+                "Address: '" + address + '\'' +
+                ", City: '" + city + '\'' +
+                ", Phone: '" + telephone + '\'';
+    }
 }

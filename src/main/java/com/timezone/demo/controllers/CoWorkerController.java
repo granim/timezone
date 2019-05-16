@@ -1,6 +1,6 @@
 package com.timezone.demo.controllers;
 
-import com.timezone.demo.model.BaseUser;
+import com.timezone.demo.model.Worker;
 import com.timezone.demo.model.Coworker;
 import com.timezone.demo.services.BaseUserService;
 import com.timezone.demo.services.CoWorkerService;
@@ -29,36 +29,36 @@ public class CoWorkerController {
     }
 
     @ModelAttribute("baseUser")
-    public BaseUser findBaseUser(@PathVariable("baseUserId") Long baseUserId) {
+    public Worker findBaseUser(@PathVariable("baseUserId") Long baseUserId) {
         return baseUserService.findById(baseUserId);
     }
 
-    @InitBinder("baseUser")
+    @InitBinder("workers")
     public void initBaseUserBinder(WebDataBinder dataBinder){
         dataBinder.setDisallowedFields("id");
     }
 
     @GetMapping("/baseUser/new")
-    public String initCreationForm(BaseUser baseUser, Model model) {
+    public String initCreationForm(Worker Worker, Model model) {
         Coworker coworker = new Coworker();
-        baseUser.getCoworkers().add(coworker);
-        coworker.setBaseuser(baseUser);
+        Worker.getCoworkers().add(coworker);
+        coworker.setBaseuser(Worker);
         model.addAttribute("baseClient", coworker);
         return VIEWS_BASECLIENT_CREATE_OR_UPDATE_FORM;
     }
 
     @PostMapping("coworker/new")
-    public String processCreationForm(BaseUser baseUser, @Valid Coworker coworker, BindingResult result, ModelMap model){
-        if (StringUtils.hasLength(coworker.getFirstName()) && coworker.isNew() && baseUser.getBaseClient(coworker.getFirstName(), true) != null){
+    public String processCreationForm(Worker Worker, @Valid Coworker coworker, BindingResult result, ModelMap model){
+        if (StringUtils.hasLength(coworker.getFirstName()) && coworker.isNew() && Worker.getBaseClient(coworker.getFirstName(), true) != null){
             result.rejectValue("name", "duplicate", "already exists");
         }
-        baseUser.getCoworkers().add(coworker);
+        Worker.getCoworkers().add(coworker);
         if(result.hasErrors()) {
             model.put("coworker", coworker);
             return VIEWS_BASECLIENT_CREATE_OR_UPDATE_FORM;
         } else {
             coWorkerService.save(coworker);
-            return "redirect:/baseUser/" + baseUser.getId();
+            return "redirect:/baseUser/" + Worker.getId();
         }
     }
 
@@ -69,13 +69,13 @@ public class CoWorkerController {
     }
 
     @PostMapping("/baseClient/{coworkerId}/edit")
-    public String processUpdateForm(@Valid Coworker coworker, BindingResult result, BaseUser baseUser, Model model) {
+    public String processUpdateForm(@Valid Coworker coworker, BindingResult result, Worker Worker, Model model) {
         if(result.hasErrors()) {
-            coworker.setBaseuser(baseUser);
+            coworker.setBaseuser(Worker);
             model.addAttribute("coworker", coworker);
             return VIEWS_BASECLIENT_CREATE_OR_UPDATE_FORM;
         } else {
-            baseUser.getCoworkers().add(coworker);
+            Worker.getCoworkers().add(coworker);
             coWorkerService.save(coworker);
             return "redirect:/baseUser/" + coworker.getId();
         }
