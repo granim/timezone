@@ -1,19 +1,18 @@
 package com.timezone.demo.services.map;
 
 import com.timezone.demo.model.BaseClient;
-import com.timezone.demo.model.Worker;
 import com.timezone.demo.model.Coworker;
+import com.timezone.demo.model.Worker;
 import com.timezone.demo.services.BaseClientService;
 import com.timezone.demo.services.BaseUserService;
 import com.timezone.demo.services.CoWorkerService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 @Service
-@Profile({"default", "map"})
+@Profile({"map"})
 public class BaseUserMapService extends AbstractMapService<Worker, Long> implements BaseUserService {
 
     private final BaseClientService baseClientService;
@@ -25,21 +24,6 @@ public class BaseUserMapService extends AbstractMapService<Worker, Long> impleme
         this.coWorkerService = coWorkerService;
     }
 
-    @Override
-    public Worker findByLastName(String lastName) {
-        return this.findAll()
-                .stream()
-                .filter(worker -> worker.getLastName().equalsIgnoreCase(lastName))
-                .findFirst()
-                .orElse(null);
-    }
-
-    @Override
-    public List<Worker> findAllByLastNameLike(String lastName) {
-
-        return null;
-
-    }
 
     @Override
     public Set<Worker> findAll() {
@@ -47,14 +31,10 @@ public class BaseUserMapService extends AbstractMapService<Worker, Long> impleme
     }
 
     @Override
-    public void deleteById(Long id) {
-        super.deleteById(id);
+    public Worker findById(Long id) {
+        return super.findById(id);
     }
 
-    @Override
-    public void delete(Worker object) {
-        super.delete(object);
-    }
 
     @Override
     public Worker save(Worker object) {
@@ -86,7 +66,28 @@ public class BaseUserMapService extends AbstractMapService<Worker, Long> impleme
     }
 
     @Override
-    public Worker findById(Long id) {
-        return super.findById(id);
+    public void deleteById(Long id) {
+        super.deleteById(id);
+    }
+
+    @Override
+    public void delete(Worker object) {
+        super.delete(object);
+    }
+
+    @Override
+    public Worker findByLastName(String lastName) {
+        return this.findAll()
+                .stream()
+                .filter(worker -> worker.getLastName().equalsIgnoreCase(lastName))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public List<Worker> findAllByLastNameLike(String lastName) {
+        //TODO - impl
+        return null;
+
     }
 }

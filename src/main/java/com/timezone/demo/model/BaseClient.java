@@ -1,6 +1,7 @@
 package com.timezone.demo.model;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
@@ -33,6 +34,7 @@ public class BaseClient extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "baseuser_id")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Worker baseuser;
 
 

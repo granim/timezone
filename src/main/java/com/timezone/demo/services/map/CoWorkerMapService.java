@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 @Service
-@Profile({"default", "map"})
+@Profile({"map"})
 public class CoWorkerMapService extends AbstractMapService<Coworker, Long> implements CoWorkerService {
 
     @Override

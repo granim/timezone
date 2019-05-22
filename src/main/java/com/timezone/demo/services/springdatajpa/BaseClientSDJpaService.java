@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-@Profile("springdatajpa")
+@Profile("default")
 public class BaseClientSDJpaService implements BaseClientService {
 
     private final ClientRepository clientRepository;

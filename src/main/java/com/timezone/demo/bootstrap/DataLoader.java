@@ -7,11 +7,9 @@ import com.timezone.demo.services.BaseClientService;
 import com.timezone.demo.services.BaseUserService;
 import com.timezone.demo.services.CoWorkerService;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
-@Profile("default")
 public class DataLoader implements CommandLineRunner {
 
    private final BaseClientService baseClientService;
@@ -36,6 +34,12 @@ public class DataLoader implements CommandLineRunner {
         grant.setCity("Melbourne");
         grant.setTelephone("3216894");
 
+        Worker workerTwo = new Worker();
+        workerTwo.setFirstName("Havi");
+        workerTwo.setLastName("Tram");
+        workerTwo.setAddress("3157 Brent");
+        workerTwo.setCity("Orlando");
+        workerTwo.setTelephone("31456987");
 
         BaseClient client1 = new BaseClient();
         client1.setCompanyName("Telemundo");
@@ -57,7 +61,22 @@ public class DataLoader implements CommandLineRunner {
         coWorkerService.save(james);
         grant.getCoworkers().add(james);
 
+        Coworker john = new Coworker();
+
+        john.setFirstName("John");
+        john.setLastName("Hoffa");
+        john.setTelephone("4563214654");
+        john.setCity("Orlando");
+        john.setAddress("15698 Set Into Drive");
+        john.setBaseuser(grant);
+        coWorkerService.save(james);
+        coWorkerService.save(john);
+        grant.getCoworkers().add(james);
+        grant.getCoworkers().add(john);
+
+
         baseUserService.save(grant);
+        baseUserService.save(workerTwo);
         System.out.println("Loaded in Worker");
     }
 

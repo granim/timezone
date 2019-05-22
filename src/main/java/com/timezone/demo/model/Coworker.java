@@ -1,12 +1,13 @@
 package com.timezone.demo.model;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -33,11 +34,40 @@ public class Coworker extends Person {
     @JoinColumn(name = "baseuser_id")
     private Worker baseuser;
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public Worker getBaseuser() {
+        return baseuser;
+    }
+
+    public void setBaseuser(Worker baseuser) {
+        this.baseuser = baseuser;
+    }
+
     @Override
     public String toString() {
-        return  getFirstName() + " " +
-                "Address: '" + address + '\'' +
-                ", City: '" + city + '\'' +
-                ", Phone: '" + telephone + '\'';
+        return  getFirstName() ;
     }
 }

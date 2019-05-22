@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'workers')}">
+
+<body>
+
+<h2>
+    <th:block th:if="${coworker['new']}">New </th:block>
+    Coworker
+</h2>
+<form th:object="${coworker}" class="form-horizontal" method="post">
+    <input type="hidden" name="id" th:value="*{id}" />
+    <div class="form-group has-feedback">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Coworker</label>
+          <!--  <div class="col-sm-10">
+                <span th:text="${coworker.baseuser?.firstName + ' ' + coworker.baseuser?.lastName}" />
+            </div>-->
+        </div>
+
+        <input th:replace="~{fragments/inputField :: input ('Fist Name', 'firstName', 'text')}" />
+        <input th:replace="~{fragments/inputField :: input ('Last Name', 'LastName', 'text')}" />
+        <input th:replace="~{fragments/inputField :: input ('Address', 'address', 'text')}" />
+        <input th:replace="~{fragments/inputField :: input ('City', 'city', 'text')}" />
+        <input th:replace="~{fragments/inputField :: input ('telphone', 'telephone', 'text')}" />
+
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button
+                    th:with="text=${coworker['new']} ? 'Add Test' : 'Update Coworker'"
+                    class="btn btn-default" type="submit" th:text="${text}">Add
+                Coworker</button>
+        </div>
+    </div>
+</form>
+
+</body>
+
+</html>

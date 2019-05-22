@@ -3,8 +3,9 @@
 
 <body>
 
-<h2>Owner</h2>
-<form th:object="${worker}" class="form-horizontal" id="add-owner-form" method="post">
+<h2>Your Information</h2>
+<!--/*@thymesVar id="worker" type="com.timezone.demo.model.Worker"*/-->
+<form th:object="${worker}" class="form-horizontal" id="add-worker-form" method="post">
     <div class="form-group has-feedback">
         <input
                 th:replace="~{fragments/inputField :: input ('First Name', 'firstName', 'text')}" />
@@ -16,13 +17,15 @@
                 th:replace="~{fragments/inputField :: input ('City', 'city', 'text')}" />
         <input
                 th:replace="~{fragments/inputField :: input ('Telephone', 'telephone', 'text')}" />
+
     </div>
+
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button
-                    th:with="text=${worker['new']} ? 'Add Owner' : 'Update Owner'"
+                    th:with="text=${worker['new']} ? 'Add Worker' : 'Update Worker'"
                     class="btn btn-default" type="submit" th:text="${text}">Add
-                Owner</button>
+                Worker</button>
         </div>
     </div>
 </form>

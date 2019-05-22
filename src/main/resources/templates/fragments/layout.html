@@ -53,7 +53,13 @@
                       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                       <span>Find Workers</span>
                   </li>
-  
+
+                  <li th:replace="::menuItem ('/coworkers/find','coworkers','find coworkers','search','Find coworkers')">
+                      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                      <span>Find Coworkers</span>
+                  </li>
+
+
                   <li th:replace="::menuItem ('/vets.html','vets','veterinarians','th-list','Veterinarians')">
                       <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                       <span>Veterinarians</span>

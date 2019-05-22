@@ -4,6 +4,7 @@ import com.timezone.demo.model.BaseClient;
 import com.timezone.demo.model.Worker;
 import com.timezone.demo.services.BaseClientService;
 import com.timezone.demo.services.BaseUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -14,15 +15,16 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Controller
+
 @RequestMapping("/baseUser/{baseUserId}")
+@Controller
 public class BaseClientController {
 
     private static final String VIEWS_BASECLIENT_CREATE_OR_UPDATE_FORM = "baseClient/createOrUpdateBaseClientForm";
     private final BaseClientService baseClientService;
     private final BaseUserService baseUserService;
 
-
+    @Autowired
     public BaseClientController(BaseClientService baseClientService, BaseUserService baseUserService) {
         this.baseClientService = baseClientService;
         this.baseUserService = baseUserService;

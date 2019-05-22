@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{fragments/layout :: layout (~{::body},'worker')}">
+      th:replace="~{fragments/layout :: layout (~{::body},'coworker')}">
 
 <body>
-<!--/*thymesBar id="Worker" type="timezone.demo.model.Worker"*/-->
-<h2>Worker Information</h2>
+<!--/*thymesBar id="Worker" type="timezone.demo.model.Coworker"*/-->
+<h2>CoWorker Information</h2>
 
-<table class="table table-striped" th:object="${worker}">
+<table class="table table-striped" th:object="${coworker}">
     <tr>
         <th>Name</th>
         <td><b th:text="*{firstName + ' ' + lastName}"></b></td>
@@ -30,15 +30,13 @@
     </tr>
     <tr>
         <th>Clients</th>
-        <td th:text="*{baseClients}" /></td>
+        <td th:text="*{baseUser}" /></td>
     </tr>
 
 </table>
 
-<a th:href="@{{id}/edit(id=${worker.id})}" class="btn btn-default">Edit
-    My Details</a>
-<a th:href="@{{id}/workers/new(id=${worker.id})}" class="btn btn-default">Add
-    New Coworker</a>
+<!--<a th:href="@{{id}/edit(id=${coworker.id})}" class="btn btn-default">Edit
+    My Details</a>-->
 
 <br />
 <br />

@@ -3,6 +3,7 @@ package com.timezone.demo.controllers;
 import com.timezone.demo.model.Worker;
 import com.timezone.demo.repositories.UserRepository;
 import com.timezone.demo.services.BaseUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,7 @@ public class WorkerController {
     private final BaseUserService baseUserService;
     private final UserRepository userRepository;
 
+    @Autowired
     public WorkerController(BaseUserService baseUserService, UserRepository userRepository) {
         this.baseUserService = baseUserService;
         this.userRepository = userRepository;
@@ -29,13 +31,6 @@ public class WorkerController {
     @InitBinder
     public void setAllowedFields(WebDataBinder dataBinder){
         dataBinder.setDisallowedFields("id");
-    }
-
-
-    @RequestMapping({"/", "/index", "/index.html"})
-    public String listWorkers(Model model){
-        model.addAttribute("workers", baseUserService.findAll());
-        return "/index";
     }
 
 
@@ -50,8 +45,7 @@ public class WorkerController {
         if(worker.getLastName() == null) {
             worker.setLastName("");
         }
-        List<Worker> results = userRepository.findAllByLastNameLike("%" + worker.getLastName() + "%");
-
+        List<Worker> results = baseUserService.findAllByLastNameLike("%" + worker.getLastName() + "%");
         if(results.isEmpty()) {
             result.rejectValue("lastName", "notFound", "not found");
             return "workers/findUsers";
@@ -64,6 +58,7 @@ public class WorkerController {
         }
     }
 
+
     @GetMapping("/{workerId}")
     public ModelAndView showBaseUser(@PathVariable("workerId") Long workerId) {
         ModelAndView mav = new ModelAndView("workers/baseUserDetails");
@@ -71,11 +66,14 @@ public class WorkerController {
         return mav;
     }
 
+
+
     @GetMapping("/new")
     public String initCreationForm(Model model) {
         model.addAttribute("worker", Worker.builder().build());
         return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
     }
+
 
     @PostMapping("/new")
     public String processCreationForm(@Valid Worker worker, BindingResult result){

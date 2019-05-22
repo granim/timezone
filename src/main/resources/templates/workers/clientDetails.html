@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'worker')}">
+
+<body>
+<!--/*thymesBar id="Worker" type="timezone.demo.model.Worker"*/-->
+<h2>Worker Information</h2>
+
+<table class="table table-striped" th:object="${worker}">
+   <tr>
+        <th>Clients</th>
+        <td th:text="*{baseClients}" /></td>
+    </tr>
+
+</table>
+
+<a th:href="@{{id}/edit(id=${worker.id})}" class="btn btn-default">Edit
+    My Details</a>
+<a th:href="@{{id}/worker/new(id=${worker.id})}" class="btn btn-default">Add
+    New Coworker</a>
+
+<br />
+<br />
+<br />
+<h2>Pets and Visits</h2>
+
+<table class="table table-striped">
+
+    <td valign="top">
+        <!--        <table class="table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Visit Date</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+
+                    </tr>
+                    <tr>
+                        <td><a
+                                th:href="@{{ownerId}/pets/{petId}/edit(ownerId=${owner.id},petId=${pet.id})}">Edit
+                            Pet</a></td>
+                        <td><a
+                                th:href="@{{ownerId}/pets/{petId}/visits/new(ownerId=${owner.id},petId=${pet.id})}">Add
+                            Visit</a></td>
+                    </tr>
+                </table>-->
+    </td>
+    </tr>
+
+</table>
+
+</body>
+
+</html>

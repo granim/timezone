@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-@Profile("springdataJPA")
+@Profile("default")
 public class BaseUserSDJService implements BaseUserService {
 
     private final UserRepository userRepository;
@@ -38,9 +38,9 @@ public class BaseUserSDJService implements BaseUserService {
 
     @Override
     public Set<Worker> findAll() {
-        Set<Worker> Worker = new HashSet<>();
-        userRepository.findAll().forEach(Worker::add);
-        return Worker;
+        Set<Worker> workers = new HashSet<>();
+        userRepository.findAll().forEach(workers::add);
+        return workers;
     }
 
     @Override

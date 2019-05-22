@@ -2,6 +2,7 @@ package com.timezone.demo.model;
 
 
 import lombok.*;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -36,15 +37,35 @@ public class Worker extends Person{
     @Column(name = "telephone")
     private String telephone;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "baseuser", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "baseuser")
     private Set<BaseClient> baseClients = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "baseuser", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "baseuser")
     private Set<Coworker> coworkers = new HashSet<>();
 
     public BaseClient getBaseClient(String name) {
         return getBaseClient(name, false);
     }
+
+    protected Set<Coworker> getCoworkersInternal(){
+        if(this.coworkers == null) {
+            this.coworkers = new HashSet<>();
+        }
+        return this.coworkers;
+    }
+
+    protected void setCoworkersInternal(Set<Coworker> coworkers){
+        this.coworkers = coworkers;
+    }
+
+    public void addCoworker(Coworker coworker){
+        if(coworker.isNew()){
+            getCoworkersInternal().add(coworker);
+        }
+        coworker.setBaseuser(this);
+    }
+
+
 
     public BaseClient getBaseClient(String name, boolean ignoreNew){
         name = name.toLowerCase();

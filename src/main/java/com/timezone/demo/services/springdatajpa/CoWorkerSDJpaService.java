@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-@Profile("springdatajpa")
+@Profile("default")
 public class CoWorkerSDJpaService implements CoWorkerService {
 
     private final CoWorkerRepository coWorkerRepository;

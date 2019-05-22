@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 @Service
-@Profile({"default", "map"})
+@Profile({ "map"})
 public class BaseClientMapService extends AbstractMapService<BaseClient, Long> implements BaseClientService {
     @Override
     public Set<BaseClient> findAll() {
