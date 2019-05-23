@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'workers')}">
+
 <body>
 
+<h2>
+    <th:block th:if="${client['new']}">New </th:block>
+    Client
+</h2>
+<form th:object="${client}" class="form-horizontal" method="post">
+    <input type="hidden" name="id" th:value="*{id}" />
+    <div class="form-group has-feedback">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Coworker</label>
+            <div class="col-sm-10">
+                <span th:text="${client.baseuser?.firstName + ' ' + client.baseuser?.lastName}" />
+            </div>
+        </div>
+
+        <input th:replace="~{fragments/inputField :: input ('Company Name', 'companyName', 'text')}" />
+        <input th:replace="~{fragments/inputField :: input ('Address', 'address', 'text')}" />
+        <input th:replace="~{fragments/inputField :: input ('City', 'city', 'text')}" />
+        <input th:replace="~{fragments/inputField :: input ('telphone', 'telephone', 'text')}" />
+
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button
+                    th:with="text=${client['new']} ? 'Add Client' : 'Update Client'"
+                    class="btn btn-default" type="submit" th:text="${text}">Add
+                Client</button>
+        </div>
+    </div>
+</form>
+
 </body>
+
 </html>
