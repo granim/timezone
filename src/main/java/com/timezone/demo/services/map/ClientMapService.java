@@ -1,16 +1,16 @@
 package com.timezone.demo.services.map;
 
-import com.timezone.demo.model.BaseClient;
-import com.timezone.demo.services.BaseClientService;
+import com.timezone.demo.model.Client;
+import com.timezone.demo.services.ClientService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 @Service
 @Profile({ "map"})
-public class BaseClientMapService extends AbstractMapService<BaseClient, Long> implements BaseClientService {
+public class ClientMapService extends AbstractMapService<Client, Long> implements ClientService {
     @Override
-    public Set<BaseClient> findAll() {
+    public Set<Client> findAll() {
         return super.findAll();
     }
 
@@ -20,17 +20,17 @@ public class BaseClientMapService extends AbstractMapService<BaseClient, Long> i
     }
 
     @Override
-    public void delete(BaseClient object) {
+    public void delete(Client object) {
         super.delete(object);
     }
 
     @Override
-    public BaseClient save(BaseClient object) {
+    public Client save(Client object) {
         return super.save(object);
     }
 
     @Override
-    public BaseClient findById(Long id) {
+    public Client findById(Long id) {
         return super.findById(id);
     }
 }

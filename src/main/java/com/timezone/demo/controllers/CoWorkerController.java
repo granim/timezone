@@ -45,7 +45,6 @@ public class CoWorkerController {
         dataBinder.setDisallowedFields("id");
     }
 
-
     @GetMapping("/coworkers/new")
     public String initCreationForm(Worker worker, ModelMap model) {
         Coworker coworker = new Coworker();
@@ -53,8 +52,6 @@ public class CoWorkerController {
         model.put("coworker", coworker);
         return VIEWS_COWORKER_CREATE_OR_UPDATE_FORM;
     }
-
-
 
     @PostMapping("/coworkers/new")
     public String processCreationForm(Worker worker, @Valid Coworker coworker, BindingResult result, Model model) {
@@ -70,8 +67,6 @@ public class CoWorkerController {
             return "redirect:/workers/{workerId}";
         }
     }
-
-    /////////////////REFACTORE THESE METHODS TO RESEMBLE THE PET CLINIC GUYS
 
     @GetMapping("coworkers/{coworkerId}/edit")
     public String initUpdateForm(@PathVariable Long coworkerId, Model model){

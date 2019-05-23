@@ -1,10 +1,10 @@
 package com.timezone.demo.services.map;
 
-import com.timezone.demo.model.BaseClient;
+import com.timezone.demo.model.Client;
 import com.timezone.demo.model.Coworker;
 import com.timezone.demo.model.Worker;
-import com.timezone.demo.services.BaseClientService;
 import com.timezone.demo.services.BaseUserService;
+import com.timezone.demo.services.ClientService;
 import com.timezone.demo.services.CoWorkerService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -15,12 +15,12 @@ import java.util.Set;
 @Profile({"map"})
 public class BaseUserMapService extends AbstractMapService<Worker, Long> implements BaseUserService {
 
-    private final BaseClientService baseClientService;
+    private final ClientService clientService;
     private final CoWorkerService coWorkerService;
 
 
-    public BaseUserMapService(BaseClientService baseClientService, CoWorkerService coWorkerService) {
-        this.baseClientService = baseClientService;
+    public BaseUserMapService(ClientService clientService, CoWorkerService coWorkerService) {
+        this.clientService = clientService;
         this.coWorkerService = coWorkerService;
     }
 
@@ -50,10 +50,10 @@ public class BaseUserMapService extends AbstractMapService<Worker, Long> impleme
                         }
                     });
                 }
-                if(object.getBaseClients() != null) {
-                    object.getBaseClients().forEach(baseClient -> {
+                if(object.getClients() != null) {
+                    object.getClients().forEach(baseClient -> {
                         if(baseClient.getId() != null) {
-                            BaseClient savedClient = baseClientService.save(baseClient);
+                            Client savedClient = clientService.save(baseClient);
                             baseClient.setId(savedClient.getId());
                         } else {
                             throw new RuntimeException("Baseclient id is required");

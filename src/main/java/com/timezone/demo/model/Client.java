@@ -10,11 +10,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "baseClients")
-public class BaseClient extends BaseEntity {
+@Table(name = "clients")
+public class Client extends BaseEntity {
 
     @Builder
-    public BaseClient(Long id, String companyName, String address, String city, String telephone, Worker baseuser) {
+    public Client(Long id, String companyName, String address, String city, String telephone, Worker baseuser) {
         super(id);
         this.companyName = companyName;
         this.address = address;
@@ -40,7 +40,7 @@ public class BaseClient extends BaseEntity {
 
     @Override
     public String toString() {
-        return "BaseClient{" +
+        return "Client{" +
                 "companyName='" + companyName + '\'' +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +

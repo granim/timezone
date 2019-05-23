@@ -1,10 +1,10 @@
 package com.timezone.demo.bootstrap;
 
-import com.timezone.demo.model.BaseClient;
+import com.timezone.demo.model.Client;
 import com.timezone.demo.model.Coworker;
 import com.timezone.demo.model.Worker;
-import com.timezone.demo.services.BaseClientService;
 import com.timezone.demo.services.BaseUserService;
+import com.timezone.demo.services.ClientService;
 import com.timezone.demo.services.CoWorkerService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -12,12 +12,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataLoader implements CommandLineRunner {
 
-   private final BaseClientService baseClientService;
+   private final ClientService clientService;
    private final CoWorkerService coWorkerService;
    private final BaseUserService baseUserService;
 
-    public DataLoader(BaseClientService baseClientService, CoWorkerService coWorkerService, BaseUserService baseUserService) {
-        this.baseClientService = baseClientService;
+    public DataLoader(ClientService clientService, CoWorkerService coWorkerService, BaseUserService baseUserService) {
+        this.clientService = clientService;
         this.coWorkerService = coWorkerService;
         this.baseUserService = baseUserService;
     }
@@ -41,14 +41,14 @@ public class DataLoader implements CommandLineRunner {
         workerTwo.setCity("Orlando");
         workerTwo.setTelephone("31456987");
 
-        BaseClient client1 = new BaseClient();
+        Client client1 = new Client();
         client1.setCompanyName("Telemundo");
         client1.setTelephone("123");
         client1.setCity("Tamps");
         client1.setAddress("234 Hulu");
         client1.setBaseuser(grant);
-        baseClientService.save(client1);
-        grant.getBaseClients().add(client1);
+        clientService.save(client1);
+        grant.getClients().add(client1);
 
         Coworker james = new Coworker();
 

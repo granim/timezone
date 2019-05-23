@@ -1,8 +1,8 @@
 package com.timezone.demo.services.springdatajpa;
 
-import com.timezone.demo.model.BaseClient;
+import com.timezone.demo.model.Client;
 import com.timezone.demo.repositories.ClientRepository;
-import com.timezone.demo.services.BaseClientService;
+import com.timezone.demo.services.ClientService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -11,33 +11,33 @@ import java.util.Set;
 
 @Service
 @Profile("default")
-public class BaseClientSDJpaService implements BaseClientService {
+public class ClientSDJpaService implements ClientService {
 
     private final ClientRepository clientRepository;
 
-    public BaseClientSDJpaService(ClientRepository clientRepository) {
+    public ClientSDJpaService(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
 
     @Override
-    public Set<BaseClient> findAll() {
-        Set<BaseClient> clients = new HashSet<>();
+    public Set<Client> findAll() {
+        Set<Client> clients = new HashSet<>();
         clientRepository.findAll().forEach(clients::add);
         return clients;
     }
 
     @Override
-    public BaseClient findById(Long aLong) {
+    public Client findById(Long aLong) {
         return clientRepository.findById(aLong).orElse(null);
     }
 
     @Override
-    public BaseClient save(BaseClient object) {
+    public Client save(Client object) {
         return clientRepository.save(object);
     }
 
     @Override
-    public void delete(BaseClient object) {
+    public void delete(Client object) {
         clientRepository.delete(object);
     }
 

@@ -16,13 +16,13 @@ import java.util.Set;
 public class Worker extends Person{
 
     @Builder
-    public Worker(Long id, String firstName, String lastName, String address, String city, String telephone, Set<BaseClient> baseClients, Set<Coworker> coworkers) {
+    public Worker(Long id, String firstName, String lastName, String address, String city, String telephone, Set<Client> clients, Set<Coworker> coworkers) {
         super(id, firstName, lastName);
         this.address = address;
         this.city = city;
         this.telephone = telephone;
-        if(baseClients == null || baseClients.size() > 0) {
-            this.baseClients = baseClients;
+        if(clients == null || clients.size() > 0) {
+            this.clients = clients;
         }
         if(coworkers == null || coworkers.size() > 0) {
             this.coworkers = coworkers;
@@ -38,12 +38,12 @@ public class Worker extends Person{
     private String telephone;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "baseuser")
-    private Set<BaseClient> baseClients = new HashSet<>();
+    private Set<Client> clients = new HashSet<>();
 
     @OneToMany( mappedBy = "baseuser")
     private Set<Coworker> coworkers = new HashSet<>();
 
-    public BaseClient getBaseClient(String name) {
+    public Client getBaseClient(String name) {
         return getBaseClient(name, false);
     }
 
@@ -65,16 +65,29 @@ public class Worker extends Person{
         coworker.setBaseuser(this);
     }
 
+    protected Set<Client> getClientsInternal(){
+        if(this.clients == null) {
+            this.clients = new HashSet<>();
+        }
+        return this.clients;
+    }
 
 
-    public BaseClient getBaseClient(String name, boolean ignoreNew){
+    public void addClient(Client client){
+        if(client.isNew()){
+            getClientsInternal().add(client);
+        }
+        client.setBaseuser(this);
+    }
+
+    public Client getBaseClient(String name, boolean ignoreNew){
         name = name.toLowerCase();
-        for(BaseClient baseClient : baseClients) {
-            if(!ignoreNew || !baseClient.isNew()) {
-                String compName = baseClient.getCompanyName();
+        for(Client client : clients) {
+            if(!ignoreNew || !client.isNew()) {
+                String compName = client.getCompanyName();
                 compName = compName.toLowerCase();
                 if(compName.equals(name)) {
-                    return baseClient;
+                    return client;
                 }
             }
         }
