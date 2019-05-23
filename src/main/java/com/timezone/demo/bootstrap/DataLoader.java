@@ -52,8 +52,8 @@ public class DataLoader implements CommandLineRunner {
 
         Coworker james = new Coworker();
 
-        james.setFirstName("James");
-        james.setLastName("Hoffa");
+        james.setfName("James");
+        james.setlName("Hoffa");
         james.setTelephone("4563214654");
         james.setCity("Orlando");
         james.setAddress("15698 Set Into Drive");
@@ -63,8 +63,8 @@ public class DataLoader implements CommandLineRunner {
 
         Coworker john = new Coworker();
 
-        john.setFirstName("John");
-        john.setLastName("Hoffa");
+        john.setfName("John");
+        john.setlName("Hoffa");
         john.setTelephone("4563214654");
         john.setCity("Orlando");
         john.setAddress("15698 Set Into Drive");

@@ -2,12 +2,14 @@ package com.timezone.demo.controllers;
 
 import com.timezone.demo.model.Coworker;
 import com.timezone.demo.model.Worker;
+import com.timezone.demo.repositories.CoWorkerRepository;
 import com.timezone.demo.repositories.UserRepository;
 import com.timezone.demo.services.BaseUserService;
 import com.timezone.demo.services.CoWorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -23,12 +25,14 @@ public class CoWorkerController {
    private final BaseUserService baseUserService;
    private final CoWorkerService coWorkerService;
    private final UserRepository userRepository;
+   private final CoWorkerRepository coWorkerRepository;
 
     @Autowired
-    public CoWorkerController(BaseUserService baseUserService, CoWorkerService coWorkerService, UserRepository userRepository) {
+    public CoWorkerController(BaseUserService baseUserService, CoWorkerService coWorkerService, UserRepository userRepository, CoWorkerRepository coWorkerRepository) {
         this.baseUserService = baseUserService;
         this.coWorkerService = coWorkerService;
         this.userRepository = userRepository;
+        this.coWorkerRepository = coWorkerRepository;
     }
 
     @ModelAttribute("worker")
@@ -43,17 +47,18 @@ public class CoWorkerController {
 
 
     @GetMapping("/coworkers/new")
-    public String initCreationForm(Worker worker, Model model) {
+    public String initCreationForm(Worker worker, ModelMap model) {
         Coworker coworker = new Coworker();
         worker.addCoworker(coworker);
-        worker.getCoworkers().add(coworker);
-        model.addAttribute("coworker", coworker);
+        model.put("coworker", coworker);
         return VIEWS_COWORKER_CREATE_OR_UPDATE_FORM;
     }
 
+
+
     @PostMapping("/coworkers/new")
     public String processCreationForm(Worker worker, @Valid Coworker coworker, BindingResult result, Model model) {
-        if (StringUtils.hasLength(coworker.getFirstName()) && coworker.isNew() && worker.getCoworker(coworker.getFirstName(), true) != null){
+        if (StringUtils.hasLength(coworker.getfName()) && coworker.isNew() && worker.getCoworker(coworker.getfName(), true) != null){
             result.rejectValue("firstName", "duplicate", "already exists");
         }
         worker.addCoworker(coworker);
@@ -66,6 +71,7 @@ public class CoWorkerController {
         }
     }
 
+    /////////////////REFACTORE THESE METHODS TO RESEMBLE THE PET CLINIC GUYS
 
     @GetMapping("coworkers/{coworkerId}/edit")
     public String initUpdateForm(@PathVariable Long coworkerId, Model model){

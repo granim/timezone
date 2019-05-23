@@ -40,7 +40,7 @@ public class Worker extends Person{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "baseuser")
     private Set<BaseClient> baseClients = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "baseuser")
+    @OneToMany( mappedBy = "baseuser")
     private Set<Coworker> coworkers = new HashSet<>();
 
     public BaseClient getBaseClient(String name) {
@@ -89,7 +89,7 @@ public class Worker extends Person{
         name = name.toLowerCase();
         for(Coworker coworker : coworkers) {
             if(!ignoreNew || !coworker.isNew()) {
-                String compName = coworker.getFirstName();
+                String compName = coworker.getfName();
                 compName = compName.toLowerCase();
                 if(compName.equals(name)) {
                     return coworker;
