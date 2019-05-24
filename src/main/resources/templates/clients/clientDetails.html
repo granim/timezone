@@ -4,13 +4,13 @@
       th:replace="~{fragments/layout :: layout (~{::body},'worker')}">
 
 <body>
-<!--/*thymesBar id="Coworker" type="timezone.demo.model.Coworker"*/-->
-<h2>Coworker Information</h2>
+<!--/*thymesBar id="Client" type="timezone.demo.model.Client"*/-->
+<h2>Client Information</h2>
 
-<table class="table table-striped" th:object="${coworker}">
+<table class="table table-striped" th:object="${client}">
     <tr>
-        <th>Name</th>
-        <td><b th:text="*{fName + ' ' + lName}"></b></td>
+        <th>Company Name</th>
+        <td><b th:text="*{companyName}"></b></td>
     </tr>
     <tr>
         <th>Address</th>
@@ -28,12 +28,13 @@
 
 </table>
 
-<a th:href="@{{id}/edit(id=${coworker.id})}" class="btn btn-default">Edit
+<a th:href="@{{id}/edit(id=${client.id})}" class="btn btn-default">Edit
     My Details</a>
 
 <br />
 <br />
 <br />
+
 
 </body>
 

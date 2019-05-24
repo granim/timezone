@@ -61,7 +61,7 @@ public class CoWorkerController {
         List<Coworker> coworkeresults = coWorkerService.findAllByLastNameLike("%" + coworker.getlName() + "%");
         if(coworkeresults.isEmpty()) {
             result.rejectValue("lName", "notFound", "not found");
-            return "coworkers/findUsers";
+            return "coworkers/findCoworkers";
         } else if (coworkeresults.size() == 1) {
             coworker = coworkeresults.get(0);
             return "redirect:/coworkers/" + coworker.getId();

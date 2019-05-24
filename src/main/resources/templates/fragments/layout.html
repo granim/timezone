@@ -54,10 +54,21 @@
                       <span>Find Workers</span>
                   </li>
 
-                  <li th:replace="::menuItem ('/coworkers/find','coworkers','find coworkers','search','Find coworkers')">
+                  <li th:replace="::menuItem ('/workers/2/coworkers','coworkers','find coworkers','search','Find coworkers')">
                       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                       <span>Find Coworkers</span>
                   </li>
+
+                  <li th:replace="::menuItem ('/workers/2/clients','clients','find clients','search','Find clients')">
+                      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                      <span>Find Clients</span>
+                  </li>
+
+                  <li th:replace="::menuItem ('/workers/2/clients/find','clients','find clients','search','Find clients')">
+                      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                      <span>Find Clients</span>
+                  </li>
+
 
   
                   <li th:replace="::menuItem ('/oups','error','trigger a RuntimeException to see how it is handled','warning-sign','Error')">

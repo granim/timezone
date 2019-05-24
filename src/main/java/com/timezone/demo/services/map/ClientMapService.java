@@ -5,6 +5,7 @@ import com.timezone.demo.services.ClientService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 @Service
 @Profile({ "map"})
@@ -33,4 +34,24 @@ public class ClientMapService extends AbstractMapService<Client, Long> implement
     public Client findById(Long id) {
         return super.findById(id);
     }
+
+    @Override
+    public Client findByCompanyName(String companyName) {
+        return this.findAll()
+                .stream()
+                .filter(client -> client.getCompanyName().equalsIgnoreCase(companyName))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public List<Client> findAllByCompanyNameLike(String companyName) {
+        //TODO - impl
+        return null;
+
+    }
+
+
+
+
 }

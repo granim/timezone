@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -45,4 +46,19 @@ public class ClientSDJpaService implements ClientService {
     public void deleteById(Long aLong) {
         clientRepository.deleteById(aLong);
     }
+
+    @Override
+    public Client findByCompanyName(String companyName) {
+        return clientRepository.findByCompanyName(companyName);
+    }
+
+    @Override
+    public List<Client> findAllByCompanyNameLike(String companyName) {
+        return clientRepository.findAllByCompanyNameLike(companyName);
+    }
+
+
+
+
+
 }

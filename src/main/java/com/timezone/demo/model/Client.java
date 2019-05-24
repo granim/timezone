@@ -1,12 +1,13 @@
 package com.timezone.demo.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -37,6 +38,45 @@ public class Client extends BaseEntity {
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Worker baseuser;
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public Worker getBaseuser() {
+        return baseuser;
+    }
+
+    public void setBaseuser(Worker baseuser) {
+        this.baseuser = baseuser;
+    }
 
     @Override
     public String toString() {

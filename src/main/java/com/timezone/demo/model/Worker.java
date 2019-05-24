@@ -40,7 +40,7 @@ public class Worker extends Person{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "baseuser")
     private Set<Client> clients = new HashSet<>();
 
-    @OneToMany( mappedBy = "baseuser")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "baseuser")
     private Set<Coworker> coworkers = new HashSet<>();
 
     public Client getBaseClient(String name) {

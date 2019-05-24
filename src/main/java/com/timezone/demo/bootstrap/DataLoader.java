@@ -50,6 +50,15 @@ public class DataLoader implements CommandLineRunner {
         clientService.save(client1);
         grant.getClients().add(client1);
 
+        /*Client client2 = new Client();
+        client2.setCompanyName("Texico");
+        client2.setTelephone("123 2334");
+        client2.setCity("Tampa");
+        client2.setAddress("234 Hulu Rd");
+        client2.setBaseuser(grant);
+        clientService.save(client2);
+        grant.getClients().add(client2);*/
+
         Coworker james = new Coworker();
 
         james.setfName("James");
