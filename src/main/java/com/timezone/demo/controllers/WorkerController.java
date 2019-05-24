@@ -58,7 +58,6 @@ public class WorkerController {
         }
     }
 
-
     @GetMapping("/{workerId}")
     public ModelAndView showBaseUser(@PathVariable("workerId") Long workerId) {
         ModelAndView mav = new ModelAndView("workers/baseUserDetails");
@@ -66,14 +65,11 @@ public class WorkerController {
         return mav;
     }
 
-
-
     @GetMapping("/new")
     public String initCreationForm(Model model) {
         model.addAttribute("worker", Worker.builder().build());
         return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
     }
-
 
     @PostMapping("/new")
     public String processCreationForm(@Valid Worker worker, BindingResult result){

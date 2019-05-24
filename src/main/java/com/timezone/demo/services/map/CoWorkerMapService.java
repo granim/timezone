@@ -5,6 +5,7 @@ import com.timezone.demo.services.CoWorkerService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 @Service
 @Profile({"map"})
@@ -33,5 +34,21 @@ public class CoWorkerMapService extends AbstractMapService<Coworker, Long> imple
     @Override
     public Coworker findById(Long id) {
         return super.findById(id);
+    }
+
+    @Override
+    public Coworker findByLastName(String lName) {
+        return this.findAll()
+                .stream()
+                .filter(coworker -> coworker.getlName().equalsIgnoreCase(lName))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public List<Coworker> findAllByLastNameLike(String lastName) {
+        //TODO - impl
+        return null;
+
     }
 }

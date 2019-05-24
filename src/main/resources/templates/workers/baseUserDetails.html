@@ -26,24 +26,28 @@
     </tr>
     <tr>
         <th>Coworkers</th>
-        <td th:text="*{coworkers}" /></td>
+        <tr th:each="coworker:${worker.coworkers}">
+              <td th:text="${coworker.fName}"> /td>
     </tr>
     <tr>
         <th>Clients</th>
-        <td th:text="*{clients}" /></td>
+          <!--<td th:text="*{clients}" /></td>-->
+        <tr th:each="client: ${worker.clients}">
+                <td th:text="${client.companyName}"></td>
+        </tr>
     </tr>
 
 </table>
 
 <a th:href="@{{id}/edit(id=${worker.id})}" class="btn btn-default">Edit
     My Details</a>
-<a th:href="@{{id}/workers/new(id=${worker.id})}" class="btn btn-default">Add
+<a th:href="@{{id}/coworkers/new(id=${worker.id})}" class="btn btn-default">Add
     New Coworker</a>
-
+<a th:href="@{{id}/clients/new(id=${worker.id})}" class="btn btn-default">Add
+    New Client</a>
 <br />
 <br />
 <br />
-<h2>Pets and Visits</h2>
 
 <!--<table class="table table-striped">
 

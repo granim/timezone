@@ -14,8 +14,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/workers/{workerId}")
@@ -45,6 +47,37 @@ public class CoWorkerController {
         dataBinder.setDisallowedFields("id");
     }
 
+    @RequestMapping("/coworkers/find")
+    public String findCoworker(Model model){
+        model.addAttribute("coworker", Coworker.builder().build());
+        return "coworkers/findCoworkers";
+    }
+
+    @GetMapping("/coworkers")
+    public String processFindCoworkerForm(Coworker coworker, BindingResult result, Model model) {
+        if(coworker.getlName() == null) {
+            coworker.setlName("");
+        }
+        List<Coworker> coworkeresults = coWorkerService.findAllByLastNameLike("%" + coworker.getlName() + "%");
+        if(coworkeresults.isEmpty()) {
+            result.rejectValue("lName", "notFound", "not found");
+            return "coworkers/findUsers";
+        } else if (coworkeresults.size() == 1) {
+            coworker = coworkeresults.get(0);
+            return "redirect:/coworkers/" + coworker.getId();
+        } else {
+            model.addAttribute("selections", coworkeresults);
+            return "coworkers/coworkerList";
+        }
+    }
+
+    @GetMapping("/coworkers/{coworkerId}")
+    public ModelAndView showBaseUser(@PathVariable("coworkerId") Long coworkerId) {
+        ModelAndView mav = new ModelAndView("coworkers/coworkerDetails");
+        mav.addObject(coWorkerService.findById(coworkerId));
+        return mav;
+    }
+
     @GetMapping("/coworkers/new")
     public String initCreationForm(Worker worker, ModelMap model) {
         Coworker coworker = new Coworker();
@@ -56,7 +89,7 @@ public class CoWorkerController {
     @PostMapping("/coworkers/new")
     public String processCreationForm(Worker worker, @Valid Coworker coworker, BindingResult result, Model model) {
         if (StringUtils.hasLength(coworker.getfName()) && coworker.isNew() && worker.getCoworker(coworker.getfName(), true) != null){
-            result.rejectValue("firstName", "duplicate", "already exists");
+            result.rejectValue("fName", "duplicate", "already exists");
         }
         worker.addCoworker(coworker);
         if(result.hasErrors()) {
@@ -86,6 +119,11 @@ public class CoWorkerController {
             return "redirect:/workers/" + worker.getId();
         }
     }
+
+
+
+
+
 
 
 }

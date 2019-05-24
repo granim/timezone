@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -44,5 +45,15 @@ public class CoWorkerSDJpaService implements CoWorkerService {
     @Override
     public void deleteById(Long aLong) {
         coWorkerRepository.deleteById(aLong);
+    }
+
+    @Override
+    public Coworker findByLastName(String lName) {
+        return coWorkerRepository.findBylName(lName);
+    }
+
+    @Override
+    public List<Coworker> findAllByLastNameLike(String lName) {
+        return coWorkerRepository.findAllBylNameLike(lName);
     }
 }
