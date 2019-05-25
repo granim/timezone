@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.TimeZone;
 
 
 @NoArgsConstructor
@@ -15,12 +16,13 @@ import javax.persistence.*;
 public class Client extends BaseEntity {
 
     @Builder
-    public Client(Long id, String companyName, String address, String city, String telephone, Worker baseuser) {
+    public Client(Long id, String companyName, String address, String city, String telephone, TimeZone timeZone, Worker baseuser) {
         super(id);
         this.companyName = companyName;
         this.address = address;
         this.city = city;
         this.telephone = telephone;
+        this.timeZone = timeZone;
         this.baseuser = baseuser;
     }
 
@@ -32,11 +34,22 @@ public class Client extends BaseEntity {
     private String city;
     @Column(name = "telephone")
     private String telephone;
+    @Column(name = "timeZone")
+    private TimeZone timeZone;
 
     @ManyToOne
     @JoinColumn(name = "baseuser_id")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Worker baseuser;
+
+
+    public TimeZone getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(TimeZone timeZone) {
+        this.timeZone = timeZone;
+    }
 
     public String getCompanyName() {
         return companyName;
@@ -88,4 +101,5 @@ public class Client extends BaseEntity {
                 ", workers=" + baseuser +
                 '}';
     }
+
 }

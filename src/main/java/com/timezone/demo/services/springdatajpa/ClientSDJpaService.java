@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
 
 @Service
 @Profile("default")
@@ -57,8 +58,10 @@ public class ClientSDJpaService implements ClientService {
         return clientRepository.findAllByCompanyNameLike(companyName);
     }
 
-
-
-
+    @Override
+    public Client findByTimeZone(TimeZone timeZone) {
+        return clientRepository.findByTimeZone(timeZone);
+    }
+    
 
 }

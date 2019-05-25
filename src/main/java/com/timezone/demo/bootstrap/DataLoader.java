@@ -9,6 +9,8 @@ import com.timezone.demo.services.CoWorkerService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.TimeZone;
+
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -46,6 +48,7 @@ public class DataLoader implements CommandLineRunner {
         client1.setTelephone("123");
         client1.setCity("Tamps");
         client1.setAddress("234 Hulu");
+        client1.setTimeZone(TimeZone.getTimeZone("America/New_York"));
         client1.setBaseuser(grant);
         clientService.save(client1);
         grant.getClients().add(client1);

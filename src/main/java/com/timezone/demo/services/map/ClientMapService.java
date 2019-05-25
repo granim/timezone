@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
+
 @Service
 @Profile({ "map"})
 public class ClientMapService extends AbstractMapService<Client, Long> implements ClientService {
@@ -51,7 +53,13 @@ public class ClientMapService extends AbstractMapService<Client, Long> implement
 
     }
 
-
+    @Override
+    public Client findByTimeZone(TimeZone timeZone) {
+        //TODO not right fix this
+        Client client = new Client();
+        client.getTimeZone();
+        return client;
+    }
 
 
 }
