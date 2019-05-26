@@ -62,6 +62,6 @@ public class ClientSDJpaService implements ClientService {
     public Client findByTimeZone(TimeZone timeZone) {
         return clientRepository.findByTimeZone(timeZone);
     }
-    
+
 
 }
