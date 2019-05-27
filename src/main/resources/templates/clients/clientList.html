@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'workers')}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'clients')}">
 
 <body>
 
@@ -19,12 +19,12 @@
     <tbody>
     <tr th:each="client : ${selections}">
         <td>
-            <a th:href="@{/clients/__${client.id}__}" th:text="${client.companyName}"/></a>
+            <a th:href="@{workers/__${worker.id}__/clients/__${client.id}__}" th:text="${client.companyName}"/></a>
         </td>
         <td th:text="${client.address}"/>
         <td th:text="${client.city}"/>
         <td th:text="${client.telephone}"/>
-        <td th:text="${client.timeZone.getDisplayName()}"></td>
+        <td th:text="${client.timeZone.getDisplayName()}" />
 
     </tr>
     </tbody>

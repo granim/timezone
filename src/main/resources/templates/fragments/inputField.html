@@ -14,7 +14,7 @@
                         pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"/>
                 <input th:case="'select'" class="form-control" type="radio" name="CentralTime" value="US/Central" th:field="*{__${name}__}"/>
                 <input th:case="'selectEast'" class="form-control" type="radio" name="EasternTime" value="US/Eastern" th:field="*{__${name}__}"/>
-                <input th:case="'west'" class="form-control" type="radio" name="WesternTime" value="US/West" th:field="*{__${name}__}"/>
+                <input th:case="'west'" class="form-control" type="radio" name="WesternTime" value="US/Pacific" th:field="*{__${name}__}"/>
                 <input th:case="'mountain'" class="form-control" type="radio" name="MountainTime" value="US/Mountain" th:field="*{__${name}__}"/>
             </div>
           <span th:if="${valid}"
