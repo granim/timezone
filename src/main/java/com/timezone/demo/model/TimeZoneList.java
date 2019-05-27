@@ -14,5 +14,11 @@ public enum TimeZoneList {
         this.zone = zone;
     }
 
+    public String getZone() {
+        return zone;
+    }
 
+    public void setZone(String zone) {
+        this.zone = zone;
+    }
 }

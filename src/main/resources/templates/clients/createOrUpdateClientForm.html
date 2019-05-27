@@ -21,7 +21,11 @@
         <input th:replace="~{fragments/inputField :: input ('Address', 'address', 'text')}" />
         <input th:replace="~{fragments/inputField :: input ('City', 'city', 'text')}" />
         <input th:replace="~{fragments/inputField :: input ('telphone', 'telephone', 'text')}" />
-        <input th:replace="~{fragments/inputField :: input ('timeZone', 'timeZone', 'text')}">
+        <input th:replace="~{fragments/inputField :: input ('Central Time', 'timeZone', 'select')}">
+        <input th:replace="~{fragments/inputField :: input ('Eastern Time', 'timeZone', 'selectEast')}">
+        <input th:replace="~{fragments/inputField :: input ('Western Time', 'timeZone', 'west')}">
+        <input th:replace="~{fragments/inputField :: input ('Mountain Time', 'timeZone', 'mountain')}">
+
 
     </div>
     <div class="form-group">

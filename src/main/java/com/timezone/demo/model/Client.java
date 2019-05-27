@@ -36,6 +36,16 @@ public class Client extends BaseEntity {
     private String telephone;
     @Column(name = "timeZone")
     private TimeZone timeZone;
+    @Enumerated(value = EnumType.STRING)
+    private TimeZoneList timeZoneList;
+
+    public TimeZoneList getTimeZoneList() {
+        return timeZoneList;
+    }
+
+    public void setTimeZoneList(TimeZoneList timeZoneList) {
+        this.timeZoneList = timeZoneList;
+    }
 
     @ManyToOne
     @JoinColumn(name = "baseuser_id")
