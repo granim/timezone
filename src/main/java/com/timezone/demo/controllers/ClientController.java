@@ -117,7 +117,7 @@ public class ClientController {
         }
           worker.addClient(client);
           clientService.save(client);
-          return "redirect:/workers" + worker.getId();
+          return "redirect:/workers/" + worker.getId();
     }
 
 
