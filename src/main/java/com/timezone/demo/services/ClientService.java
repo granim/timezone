@@ -18,4 +18,5 @@ public interface ClientService extends CrudService<Client, Long>{
     Client findByTimeZone(TimeZone timeZone);
 
 
+
 }

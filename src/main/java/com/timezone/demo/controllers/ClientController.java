@@ -54,7 +54,7 @@ public class ClientController {
     }
 
     @GetMapping("/clients")
-    public String processFindClientForm(Client client, BindingResult result, Model model) {
+    public String processFindClientForm(Client client, BindingResult result, Model model, Worker worker) {
         if(client.getCompanyName() == null) {
             client.setCompanyName("");
         }
@@ -64,11 +64,12 @@ public class ClientController {
             return "clients/findClients";
         } else if (clientResults.size() == 1) {
             client = clientResults.get(0);
-            return "redirect:/clients/" + client.getId();
+            return "redirect:/workers/"  + worker.getId() + "/clients/" + client.getId();
         } else {
             model.addAttribute("selections", clientResults);
             return "clients/clientList";
         }
+
     }
 
     @GetMapping("/clients/{clientId}")

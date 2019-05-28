@@ -54,7 +54,7 @@ public class CoWorkerController {
     }
 
     @GetMapping("/coworkers")
-    public String processFindCoworkerForm(Coworker coworker, BindingResult result, Model model) {
+    public String processFindCoworkerForm(Coworker coworker, BindingResult result, Worker worker, Model model) {
         if(coworker.getlName() == null) {
             coworker.setlName("");
         }
@@ -64,7 +64,7 @@ public class CoWorkerController {
             return "coworkers/findCoworkers";
         } else if (coworkeresults.size() == 1) {
             coworker = coworkeresults.get(0);
-            return "redirect:/coworkers/" + coworker.getId();
+            return "redirect:/workers/" + worker.getId() + "/coworkers/" + coworker.getId();
         } else {
             model.addAttribute("selections", coworkeresults);
             return "coworkers/coworkerList";
