@@ -3,7 +3,7 @@ package com.timezone.demo.controllers;
 import com.timezone.demo.model.Coworker;
 import com.timezone.demo.model.Worker;
 import com.timezone.demo.repositories.CoWorkerRepository;
-import com.timezone.demo.repositories.UserRepository;
+import com.timezone.demo.repositories.WorkerRepository;
 import com.timezone.demo.services.BaseUserService;
 import com.timezone.demo.services.CoWorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +26,14 @@ public class CoWorkerController {
     private static final String VIEWS_COWORKER_CREATE_OR_UPDATE_FORM = "coworkers/createOrUpdateCoworkerForm";
    private final BaseUserService baseUserService;
    private final CoWorkerService coWorkerService;
-   private final UserRepository userRepository;
+   private final WorkerRepository workerRepository;
    private final CoWorkerRepository coWorkerRepository;
 
     @Autowired
-    public CoWorkerController(BaseUserService baseUserService, CoWorkerService coWorkerService, UserRepository userRepository, CoWorkerRepository coWorkerRepository) {
+    public CoWorkerController(BaseUserService baseUserService, CoWorkerService coWorkerService, WorkerRepository workerRepository, CoWorkerRepository coWorkerRepository) {
         this.baseUserService = baseUserService;
         this.coWorkerService = coWorkerService;
-        this.userRepository = userRepository;
+        this.workerRepository = workerRepository;
         this.coWorkerRepository = coWorkerRepository;
     }
 

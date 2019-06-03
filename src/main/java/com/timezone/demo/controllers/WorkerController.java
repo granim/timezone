@@ -1,7 +1,7 @@
 package com.timezone.demo.controllers;
 
 import com.timezone.demo.model.Worker;
-import com.timezone.demo.repositories.UserRepository;
+import com.timezone.demo.repositories.WorkerRepository;
 import com.timezone.demo.services.BaseUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,12 +20,12 @@ public class WorkerController {
 
     private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "/workers/createOrUpdateWorkerForm";
     private final BaseUserService baseUserService;
-    private final UserRepository userRepository;
+    private final WorkerRepository workerRepository;
 
     @Autowired
-    public WorkerController(BaseUserService baseUserService, UserRepository userRepository) {
+    public WorkerController(BaseUserService baseUserService, WorkerRepository workerRepository) {
         this.baseUserService = baseUserService;
-        this.userRepository = userRepository;
+        this.workerRepository = workerRepository;
     }
 
     @InitBinder

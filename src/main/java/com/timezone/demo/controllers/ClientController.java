@@ -3,7 +3,7 @@ package com.timezone.demo.controllers;
 import com.timezone.demo.model.Client;
 import com.timezone.demo.model.Worker;
 import com.timezone.demo.repositories.ClientRepository;
-import com.timezone.demo.repositories.UserRepository;
+import com.timezone.demo.repositories.WorkerRepository;
 import com.timezone.demo.services.BaseUserService;
 import com.timezone.demo.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +26,14 @@ public class ClientController {
     private static final String VIEWS_CLIENT_CREATE_OR_UPDATE_FORM = "clients/createOrUpdateClientForm";
     private final BaseUserService baseUserService;
     private final ClientService clientService;
-    private final UserRepository userRepository;
+    private final WorkerRepository workerRepository;
     private final ClientRepository clientRepository;
 
     @Autowired
-    public ClientController(BaseUserService baseUserService, ClientService clientService, UserRepository userRepository, ClientRepository clientRepository) {
+    public ClientController(BaseUserService baseUserService, ClientService clientService, WorkerRepository workerRepository, ClientRepository clientRepository) {
         this.baseUserService = baseUserService;
         this.clientService = clientService;
-        this.userRepository = userRepository;
+        this.workerRepository = workerRepository;
         this.clientRepository = clientRepository;
     }
 

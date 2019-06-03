@@ -1,6 +1,5 @@
 package com.timezone.demo.model;
 
-
 import lombok.*;
 
 import javax.persistence.*;
