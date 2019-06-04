@@ -1,8 +1,8 @@
 package com.timezone.demo.controllers;
 
 import com.timezone.demo.model.Worker;
-import com.timezone.demo.repositories.UserRepository;
-import com.timezone.demo.services.BaseUserService;
+import com.timezone.demo.repositories.WorkerRepository;
+import com.timezone.demo.services.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +19,13 @@ import java.util.List;
 public class WorkerController {
 
     private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "/workers/createOrUpdateWorkerForm";
-    private final BaseUserService baseUserService;
-    private final UserRepository userRepository;
+    private final WorkerService workerService;
+    private final WorkerRepository workerRepository;
 
     @Autowired
-    public WorkerController(BaseUserService baseUserService, UserRepository userRepository) {
-        this.baseUserService = baseUserService;
-        this.userRepository = userRepository;
+    public WorkerController(WorkerService workerService, WorkerRepository workerRepository) {
+        this.workerService = workerService;
+        this.workerRepository = workerRepository;
     }
 
     @InitBinder
@@ -45,7 +45,7 @@ public class WorkerController {
         if(worker.getLastName() == null) {
             worker.setLastName("");
         }
-        List<Worker> results = baseUserService.findAllByLastNameLike("%" + worker.getLastName() + "%");
+        List<Worker> results = workerService.findAllByLastNameLike("%" + worker.getLastName() + "%");
         if(results.isEmpty()) {
             result.rejectValue("lastName", "notFound", "not found");
             return "workers/findUsers";
@@ -61,7 +61,7 @@ public class WorkerController {
     @GetMapping("/{workerId}")
     public ModelAndView showBaseUser(@PathVariable("workerId") Long workerId) {
         ModelAndView mav = new ModelAndView("workers/baseUserDetails");
-        mav.addObject(baseUserService.findById(workerId));
+        mav.addObject(workerService.findById(workerId));
         return mav;
     }
 
@@ -76,14 +76,14 @@ public class WorkerController {
         if(result.hasErrors()) {
             return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
         } else {
-            Worker savedUser = baseUserService.save(worker);
+            Worker savedUser = workerService.save(worker);
             return "redirect:/workers/" + savedUser.getId();
         }
     }
 
     @GetMapping("/{workerId}/edit")
     public String initUpdateBaseUserForm(@PathVariable Long workerId, Model model){
-        model.addAttribute(baseUserService.findById(workerId));
+        model.addAttribute(workerService.findById(workerId));
         return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
     }
 
@@ -93,7 +93,7 @@ public class WorkerController {
             return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
         } else {
             worker.setId(workerId);
-            Worker savedUser = baseUserService.save(worker);
+            Worker savedUser = workerService.save(worker);
             return "redirect:/workers/" + savedUser.getId();
         }
     }

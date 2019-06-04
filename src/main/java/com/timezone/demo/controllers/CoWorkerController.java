@@ -3,9 +3,9 @@ package com.timezone.demo.controllers;
 import com.timezone.demo.model.Coworker;
 import com.timezone.demo.model.Worker;
 import com.timezone.demo.repositories.CoWorkerRepository;
-import com.timezone.demo.repositories.UserRepository;
-import com.timezone.demo.services.BaseUserService;
+import com.timezone.demo.repositories.WorkerRepository;
 import com.timezone.demo.services.CoWorkerService;
+import com.timezone.demo.services.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,22 +24,22 @@ import java.util.List;
 public class CoWorkerController {
 
     private static final String VIEWS_COWORKER_CREATE_OR_UPDATE_FORM = "coworkers/createOrUpdateCoworkerForm";
-   private final BaseUserService baseUserService;
+   private final WorkerService workerService;
    private final CoWorkerService coWorkerService;
-   private final UserRepository userRepository;
+   private final WorkerRepository workerRepository;
    private final CoWorkerRepository coWorkerRepository;
 
     @Autowired
-    public CoWorkerController(BaseUserService baseUserService, CoWorkerService coWorkerService, UserRepository userRepository, CoWorkerRepository coWorkerRepository) {
-        this.baseUserService = baseUserService;
+    public CoWorkerController(WorkerService workerService, CoWorkerService coWorkerService, WorkerRepository workerRepository, CoWorkerRepository coWorkerRepository) {
+        this.workerService = workerService;
         this.coWorkerService = coWorkerService;
-        this.userRepository = userRepository;
+        this.workerRepository = workerRepository;
         this.coWorkerRepository = coWorkerRepository;
     }
 
     @ModelAttribute("worker")
     public Worker findBaseUser(@PathVariable("workerId") Long workerId) {
-        return baseUserService.findById(workerId);
+        return workerService.findById(workerId);
     }
 
     @InitBinder("worker")

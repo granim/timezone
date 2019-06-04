@@ -3,9 +3,9 @@ package com.timezone.demo.controllers;
 import com.timezone.demo.model.Client;
 import com.timezone.demo.model.Worker;
 import com.timezone.demo.repositories.ClientRepository;
-import com.timezone.demo.repositories.UserRepository;
-import com.timezone.demo.services.BaseUserService;
+import com.timezone.demo.repositories.WorkerRepository;
 import com.timezone.demo.services.ClientService;
+import com.timezone.demo.services.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,22 +24,22 @@ import java.util.List;
 public class ClientController {
 
     private static final String VIEWS_CLIENT_CREATE_OR_UPDATE_FORM = "clients/createOrUpdateClientForm";
-    private final BaseUserService baseUserService;
+    private final WorkerService workerService;
     private final ClientService clientService;
-    private final UserRepository userRepository;
+    private final WorkerRepository workerRepository;
     private final ClientRepository clientRepository;
 
     @Autowired
-    public ClientController(BaseUserService baseUserService, ClientService clientService, UserRepository userRepository, ClientRepository clientRepository) {
-        this.baseUserService = baseUserService;
+    public ClientController(WorkerService workerService, ClientService clientService, WorkerRepository workerRepository, ClientRepository clientRepository) {
+        this.workerService = workerService;
         this.clientService = clientService;
-        this.userRepository = userRepository;
+        this.workerRepository = workerRepository;
         this.clientRepository = clientRepository;
     }
 
     @ModelAttribute("worker")
     public Worker findBaseUser(@PathVariable("workerId")Long workerId){
-        return baseUserService.findById(workerId);
+        return workerService.findById(workerId);
     }
 
     @InitBinder("worker")

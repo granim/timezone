@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface UserRepository extends CrudRepository<Worker, Long> {
+public interface WorkerRepository extends CrudRepository<Worker, Long> {
 
     Worker findByLastName(String lastName);
 

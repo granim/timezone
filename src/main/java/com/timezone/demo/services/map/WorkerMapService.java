@@ -3,9 +3,9 @@ package com.timezone.demo.services.map;
 import com.timezone.demo.model.Client;
 import com.timezone.demo.model.Coworker;
 import com.timezone.demo.model.Worker;
-import com.timezone.demo.services.BaseUserService;
 import com.timezone.demo.services.ClientService;
 import com.timezone.demo.services.CoWorkerService;
+import com.timezone.demo.services.WorkerService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.Set;
 @Service
 @Profile({"map"})
-public class BaseUserMapService extends AbstractMapService<Worker, Long> implements BaseUserService {
+public class WorkerMapService extends AbstractMapService<Worker, Long> implements WorkerService {
 
     private final ClientService clientService;
     private final CoWorkerService coWorkerService;
 
 
-    public BaseUserMapService(ClientService clientService, CoWorkerService coWorkerService) {
+    public WorkerMapService(ClientService clientService, CoWorkerService coWorkerService) {
         this.clientService = clientService;
         this.coWorkerService = coWorkerService;
     }

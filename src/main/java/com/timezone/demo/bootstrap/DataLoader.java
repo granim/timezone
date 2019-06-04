@@ -3,9 +3,9 @@ package com.timezone.demo.bootstrap;
 import com.timezone.demo.model.Client;
 import com.timezone.demo.model.Coworker;
 import com.timezone.demo.model.Worker;
-import com.timezone.demo.services.BaseUserService;
 import com.timezone.demo.services.ClientService;
 import com.timezone.demo.services.CoWorkerService;
+import com.timezone.demo.services.WorkerService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -16,12 +16,12 @@ public class DataLoader implements CommandLineRunner {
 
    private final ClientService clientService;
    private final CoWorkerService coWorkerService;
-   private final BaseUserService baseUserService;
+   private final WorkerService workerService;
 
-    public DataLoader(ClientService clientService, CoWorkerService coWorkerService, BaseUserService baseUserService) {
+    public DataLoader(ClientService clientService, CoWorkerService coWorkerService, WorkerService workerService) {
         this.clientService = clientService;
         this.coWorkerService = coWorkerService;
-        this.baseUserService = baseUserService;
+        this.workerService = workerService;
     }
 
 
@@ -87,8 +87,8 @@ public class DataLoader implements CommandLineRunner {
         grant.getCoworkers().add(john);
 
 
-        baseUserService.save(grant);
-        baseUserService.save(workerTwo);
+        workerService.save(grant);
+        workerService.save(workerTwo);
         System.out.println("Loaded in Worker");
     }
 
