@@ -49,7 +49,7 @@ public class DataLoader implements CommandLineRunner {
         client1.setCity("Tamps");
         client1.setAddress("234 Hulu");
         client1.setTimeZone(TimeZone.getTimeZone("America/New_York"));
-        client1.setBaseuser(grant);
+        client1.setWorker(grant);
         clientService.save(client1);
         grant.getClients().add(client1);
 
@@ -58,7 +58,7 @@ public class DataLoader implements CommandLineRunner {
         client2.setTelephone("123 2334");
         client2.setCity("Tampa");
         client2.setAddress("234 Hulu Rd");
-        client2.setBaseuser(grant);
+        client2.setWorker(grant);
         clientService.save(client2);
         grant.getClients().add(client2);*/
 

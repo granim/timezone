@@ -77,7 +77,7 @@ public class Worker extends Person{
         if(client.isNew()){
             getClientsInternal().add(client);
         }
-        client.setBaseuser(this);
+        client.setWorker(this);
     }
 
     public Client getBaseClient(String name, boolean ignoreNew){

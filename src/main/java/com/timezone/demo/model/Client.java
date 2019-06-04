@@ -16,14 +16,14 @@ import java.util.TimeZone;
 public class Client extends BaseEntity {
 
     @Builder
-    public Client(Long id, String companyName, String address, String city, String telephone, TimeZone timeZone, Worker baseuser) {
+    public Client(Long id, String companyName, String address, String city, String telephone, TimeZone timeZone, Worker worker) {
         super(id);
         this.companyName = companyName;
         this.address = address;
         this.city = city;
         this.telephone = telephone;
         this.timeZone = timeZone;
-        this.baseuser = baseuser;
+        this.worker = worker;
     }
 
     @Column(name = "company_name")
@@ -50,8 +50,7 @@ public class Client extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "baseuser_id")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    private Worker baseuser;
-
+    private Worker worker;
 
     public TimeZone getTimeZone() {
         return timeZone;
@@ -93,12 +92,12 @@ public class Client extends BaseEntity {
         this.telephone = telephone;
     }
 
-    public Worker getBaseuser() {
-        return baseuser;
+    public Worker getWorker() {
+        return worker;
     }
 
-    public void setBaseuser(Worker baseuser) {
-        this.baseuser = baseuser;
+    public void setWorker(Worker worker) {
+        this.worker = worker;
     }
 
     @Override
@@ -108,7 +107,7 @@ public class Client extends BaseEntity {
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", telephone='" + telephone + '\'' +
-                ", workers=" + baseuser +
+                ", workers=" + worker +
                 '}';
     }
 

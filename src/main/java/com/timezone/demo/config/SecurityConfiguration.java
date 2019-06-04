@@ -32,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 /*----------permit all users to view the home page-------*/
-                .antMatchers("/index.html", "", "/home").permitAll()
+                .antMatchers("/index.html").permitAll()
                 /*------protect all folders and their contents*/
                 .antMatchers( "/workers/**", "/coworkers/**", "/clients/**", "/fragments/**").authenticated()
                 /*----------protect methods inside your controllers----------*/

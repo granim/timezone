@@ -112,7 +112,7 @@ public class ClientController {
     @PostMapping("clients/{clientId}/edit")
     public String processUpdateForm(@Valid Client client, BindingResult result, Worker worker, Model model) {
         if(result.hasErrors()) {
-            client.setBaseuser(worker);
+            client.setWorker(worker);
             model.addAttribute("client", client);
             return VIEWS_CLIENT_CREATE_OR_UPDATE_FORM;
         }
