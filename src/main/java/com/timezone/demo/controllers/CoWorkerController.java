@@ -110,7 +110,7 @@ public class CoWorkerController {
     @PostMapping("/coworkers/{coworkerId}/edit")
     public String processUpdateForm(@Valid Coworker coworker, BindingResult result, Worker worker, Model model) {
         if(result.hasErrors()) {
-            coworker.setBaseuser(worker);
+            coworker.setWorker(worker);
             model.addAttribute("coworker", coworker);
             return VIEWS_COWORKER_CREATE_OR_UPDATE_FORM;
         } else {

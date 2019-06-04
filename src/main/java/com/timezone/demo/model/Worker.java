@@ -37,10 +37,10 @@ public class Worker extends Person{
     @Column(name = "telephone")
     private String telephone;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "baseuser")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "worker")
     private Set<Client> clients = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "baseuser")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "worker")
     private Set<Coworker> coworkers = new HashSet<>();
 
     public Client getBaseClient(String name) {
@@ -62,7 +62,7 @@ public class Worker extends Person{
         if(coworker.isNew()){
             getCoworkersInternal().add(coworker);
         }
-        coworker.setBaseuser(this);
+        coworker.setWorker(this);
     }
 
     protected Set<Client> getClientsInternal(){

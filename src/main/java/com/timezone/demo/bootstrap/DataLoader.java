@@ -2,9 +2,11 @@ package com.timezone.demo.bootstrap;
 
 import com.timezone.demo.model.Client;
 import com.timezone.demo.model.Coworker;
+import com.timezone.demo.model.User;
 import com.timezone.demo.model.Worker;
 import com.timezone.demo.services.ClientService;
 import com.timezone.demo.services.CoWorkerService;
+import com.timezone.demo.services.UserService;
 import com.timezone.demo.services.WorkerService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -17,11 +19,13 @@ public class DataLoader implements CommandLineRunner {
    private final ClientService clientService;
    private final CoWorkerService coWorkerService;
    private final WorkerService workerService;
+   private final UserService userService;
 
-    public DataLoader(ClientService clientService, CoWorkerService coWorkerService, WorkerService workerService) {
+    public DataLoader(ClientService clientService, CoWorkerService coWorkerService, WorkerService workerService, UserService userService) {
         this.clientService = clientService;
         this.coWorkerService = coWorkerService;
         this.workerService = workerService;
+        this.userService = userService;
     }
 
 
@@ -69,7 +73,7 @@ public class DataLoader implements CommandLineRunner {
         james.setTelephone("4563214654");
         james.setCity("Orlando");
         james.setAddress("15698 Set Into Drive");
-        james.setBaseuser(grant);
+        james.setWorker(grant);
         coWorkerService.save(james);
         grant.getCoworkers().add(james);
 
@@ -80,7 +84,7 @@ public class DataLoader implements CommandLineRunner {
         john.setTelephone("4563214654");
         john.setCity("Orlando");
         john.setAddress("15698 Set Into Drive");
-        john.setBaseuser(grant);
+        john.setWorker(grant);
         coWorkerService.save(james);
         coWorkerService.save(john);
         grant.getCoworkers().add(james);
@@ -90,6 +94,18 @@ public class DataLoader implements CommandLineRunner {
         workerService.save(grant);
         workerService.save(workerTwo);
         System.out.println("Loaded in Worker");
+
+
+        User userOne = new User();
+        userOne.setActive(1);
+        userOne.setPassWord("Pass");
+        userOne.setUserName("Grant");
+        userOne.setPermissions("");
+        userOne.setRoles("ADMIN");
+        userService.save(userOne);
+        System.out.println("added in User");
+
+
     }
 
 

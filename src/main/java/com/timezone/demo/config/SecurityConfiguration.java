@@ -37,6 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers( "/workers/**", "/coworkers/**", "/clients/**", "/fragments/**").authenticated()
                 /*----------protect methods inside your controllers----------*/
                 .antMatchers("/api/public/processFindForm").authenticated()
+                .antMatchers("/api/public/users").hasRole("ADMIN")
                 .and()
                 .httpBasic();
     }

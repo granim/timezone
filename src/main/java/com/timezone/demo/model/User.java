@@ -21,7 +21,7 @@ public class User{
         this.active = 1;
     }
 
-    protected User(){}
+     public User(){}
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

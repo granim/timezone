@@ -15,14 +15,14 @@ import javax.persistence.*;
 public class Coworker  extends BaseEntity {
 
     @Builder
-    public Coworker(Long id, String fName, String lName, String address, String city, String telephone, Worker baseuser) {
+    public Coworker(Long id, String fName, String lName, String address, String city, String telephone, Worker worker) {
        super(id);
         this.fName = fName;
         this.lName = lName;
         this.address = address;
         this.city = city;
         this.telephone = telephone;
-        this.baseuser = baseuser;
+        this.worker = worker;
     }
 
     @Column(name = "address")
@@ -39,8 +39,8 @@ public class Coworker  extends BaseEntity {
 
 
     @ManyToOne
-    @JoinColumn(name = "baseuser_id")
-    private Worker baseuser;
+    @JoinColumn(name = "worker_id")
+    private Worker worker;
 
     public String getAddress() {
         return address;
@@ -66,12 +66,12 @@ public class Coworker  extends BaseEntity {
         this.telephone = telephone;
     }
 
-    public Worker getBaseuser() {
-        return baseuser;
+    public Worker getWorker() {
+        return worker;
     }
 
-    public void setBaseuser(Worker baseuser) {
-        this.baseuser = baseuser;
+    public void setWorker(Worker worker) {
+        this.worker = worker;
     }
 
     public String getfName() {
