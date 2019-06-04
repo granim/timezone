@@ -17,17 +17,26 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
        auth
                .inMemoryAuthentication()
-               .withUser("cc").password(passwordEncoder().encode("pass")).roles("ADMIN")
+               .withUser("cc")
+               .password(passwordEncoder().encode("pass"))
+               .roles("ADMIN").authorities("ACCESS_PROCESSFINDFORM")
                .and()
-               .withUser("cd").password(passwordEncoder().encode("pass")).roles("USER");
+               .withUser("grant")
+               .password(passwordEncoder().encode("pass"))
+                /*Permission based authorizaion*/
+               .roles("USER").authorities("ACCESS_PROCESSFINDFORM");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/index.html").permitAll()
+                /*----------permit all users to view the home page-------*/
+                .antMatchers("/index.html", "", "/home").permitAll()
+                /*------protect all folders and their contents*/
                 .antMatchers( "/workers/**", "/coworkers/**", "/clients/**", "/fragments/**").authenticated()
+                /*----------protect methods inside your controllers----------*/
+                .antMatchers("/api/public/processFindForm").authenticated()
                 .and()
                 .httpBasic();
     }
