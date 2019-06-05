@@ -17,14 +17,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
        auth
                .inMemoryAuthentication()
+
                .withUser("cc")
                .password(passwordEncoder().encode("pass"))
                .roles("ADMIN").authorities("ACCESS_PROCESSFINDFORM")
+
                .and()
+
                .withUser("grant")
                .password(passwordEncoder().encode("pass"))
-                /*Permission based authorizaion*/
                .roles("USER").authorities("ACCESS_PROCESSFINDFORM");
+
+
+
     }
 
     @Override
