@@ -22,17 +22,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
        auth.authenticationProvider(authenticationProvider());
         //----------IN MEMORY AUTHENTICATION------------------//
               /* .inMemoryAuthentication()
-
                .withUser("cc")
                .password(passwordEncoder().encode("pass"))
                .roles("ADMIN").authorities("ACCESS_PROCESSFINDFORM")
-
                .and()
-
                .withUser("grant")
                .password(passwordEncoder().encode("pass"))
                .roles("USER").authorities("ACCESS_PROCESSFINDFORM");*/
@@ -50,7 +47,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/public/processFindForm").authenticated()
                 .antMatchers("/api/public/users").hasRole("ADMIN")
                 .and()
-                .httpBasic();
+                //Replace basic with form based Auth
+                /*.httpBasic();*/
+                .formLogin()
+                .loginPage("/login").permitAll();
+
     }
 
     @Bean

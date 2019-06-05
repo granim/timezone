@@ -16,7 +16,6 @@ public class UserPrincipal implements UserDetails {
         this.user = user;
     }
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
@@ -37,7 +36,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.user.getPassWord();
+        return this.user.getPassword();
     }
 
     @Override

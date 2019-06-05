@@ -13,15 +13,15 @@ import java.util.List;
 public class User{
 
     @Builder
-    public User(String userName, String passWord, String roles, String permissions) {
+    public User(String userName, String password, String roles, String permissions) {
         this.userName = userName;
-        this.passWord = passWord;
+        this.password = password;
         this.roles = roles;
         this.permissions = permissions;
         this.active = 1;
     }
 
-     public User(){}
+    public User(){}
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,7 +31,7 @@ public class User{
     private String userName;
 
     @Column(nullable = false, name = "password")
-    private String passWord;
+    private String password;
 
     private int active;
 
@@ -47,12 +47,12 @@ public class User{
         this.userName = userName;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getActive() {

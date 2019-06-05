@@ -40,7 +40,7 @@ public class DataLoader implements CommandLineRunner {
 
 
         Worker grant = new Worker();
-        grant.setFirstName("Grant");
+        grant.setFirstName("James");
         grant.setLastName("Murray");
         grant.setAddress("234 Debar");
         grant.setCity("Melbourne");
@@ -100,18 +100,18 @@ public class DataLoader implements CommandLineRunner {
         workerService.save(grant);
         workerService.save(workerTwo);
         System.out.println("Loaded in Worker");
-
+        userRepository.deleteAll();
 
         User userOne = new User();
         userOne.setActive(1);
-        userOne.setPassWord(passwordEncoder.encode("pass"));
-        userOne.setUserName("grant");
+        userOne.setPassword(passwordEncoder.encode("123"));
+        userOne.setUserName("kim");
         userOne.setPermissions("ACCESS");
         userOne.setRoles("ADMIN");
         userRepository.save(userOne);
         System.out.println("added in User");
-
-
+        System.out.println(userService.findByUserName("kim"));
+        System.out.println(userRepository.findByUserName("kim"));
     }
 
 
