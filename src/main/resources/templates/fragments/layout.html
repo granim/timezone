@@ -69,13 +69,17 @@
                       <span>Find Clients</span>
                   </li>
 
-
-  
                   <li th:replace="::menuItem ('/oups','error','trigger a RuntimeException to see how it is handled','warning-sign','Error')">
                       <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
                       <span>Error</span>
                   </li>
-  
+
+                  <li>
+                      <form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}">
+                          <button class="btn btn-outline-danger my-2 my-sm-0 btn-sm" type="submit">Logout</button>
+                      </form>
+                  </li>
+
               </ul>
           </div>
       </div>
