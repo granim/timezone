@@ -23,8 +23,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-       auth
-               .inMemoryAuthentication()
+       auth.authenticationProvider(authenticationProvider());
+        //----------IN MEMORY AUTHENTICATION------------------//
+              /* .inMemoryAuthentication()
 
                .withUser("cc")
                .password(passwordEncoder().encode("pass"))
@@ -34,8 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                .withUser("grant")
                .password(passwordEncoder().encode("pass"))
-               .roles("USER").authorities("ACCESS_PROCESSFINDFORM");
-
+               .roles("USER").authorities("ACCESS_PROCESSFINDFORM");*/
     }
 
     @Override
@@ -44,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 /*----------permit all users to view the home page-------*/
                 .antMatchers("/index.html").permitAll()
-                /*------protect all folders and their contents*/
+                /*------protect all folders and their pages*/
                 .antMatchers( "/workers/**", "/coworkers/**", "/clients/**", "/fragments/**").authenticated()
                 /*----------protect methods inside your controllers----------*/
                 .antMatchers("/api/public/processFindForm").authenticated()

@@ -4,11 +4,13 @@ import com.timezone.demo.model.Client;
 import com.timezone.demo.model.Coworker;
 import com.timezone.demo.model.User;
 import com.timezone.demo.model.Worker;
+import com.timezone.demo.repositories.UserRepository;
 import com.timezone.demo.services.ClientService;
 import com.timezone.demo.services.CoWorkerService;
 import com.timezone.demo.services.UserService;
 import com.timezone.demo.services.WorkerService;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.TimeZone;
@@ -20,12 +22,16 @@ public class DataLoader implements CommandLineRunner {
    private final CoWorkerService coWorkerService;
    private final WorkerService workerService;
    private final UserService userService;
+   private PasswordEncoder passwordEncoder;
+   private UserRepository userRepository;
 
-    public DataLoader(ClientService clientService, CoWorkerService coWorkerService, WorkerService workerService, UserService userService) {
+    public DataLoader(ClientService clientService, CoWorkerService coWorkerService, WorkerService workerService, UserService userService, PasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.clientService = clientService;
         this.coWorkerService = coWorkerService;
         this.workerService = workerService;
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
     }
 
 
@@ -98,11 +104,11 @@ public class DataLoader implements CommandLineRunner {
 
         User userOne = new User();
         userOne.setActive(1);
-        userOne.setPassWord("Pass");
-        userOne.setUserName("Grant");
-        userOne.setPermissions("");
+        userOne.setPassWord(passwordEncoder.encode("pass"));
+        userOne.setUserName("grant");
+        userOne.setPermissions("ACCESS");
         userOne.setRoles("ADMIN");
-        userService.save(userOne);
+        userRepository.save(userOne);
         System.out.println("added in User");
 
 
