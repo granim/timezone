@@ -6,7 +6,9 @@ import com.timezone.demo.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserPrincipalDetailsService implements UserDetailsService {
 
     private UserRepository userRepository;
