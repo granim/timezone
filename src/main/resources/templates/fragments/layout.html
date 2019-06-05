@@ -1,5 +1,6 @@
 <!doctype html>
-<html th:fragment="layout (template, menu)">
+<html th:fragment="layout (template, menu)"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
   <head>
 
@@ -10,7 +11,7 @@
 
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/images/favicon.png}">
 
-    <title>PetClinic :: a Spring Framework demonstration</title>
+    <title>TimeZone :: a Spring Framework Web Application</title>
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -49,34 +50,35 @@
                       <span>Home</span>
                   </li>
   
-                  <li th:replace="::menuItem ('/workers/find','workers','find workers','search','Find workers')">
+                  <li sec:authorize="isAuthenticated()" th:replace="::menuItem ('/workers/find','workers','find workers','search','Find workers')">
                       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                       <span>Find Workers</span>
                   </li>
 
-                  <li th:replace="::menuItem ('/workers/2/coworkers','coworkers','find coworkers','search','Find coworkers')">
+                  <li sec:authorize="isAuthenticated()" th:replace="::menuItem ('/workers/2/coworkers','coworkers','find coworkers','search','Find coworkers')">
                       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                       <span>Find Coworkers</span>
                   </li>
 
-                  <li th:replace="::menuItem ('/workers/2/clients','clients','find clients','search','Find clients')">
+                  <li sec:authorize="isAuthenticated()" th:replace="::menuItem ('/workers/2/clients','clients','find clients','search','Find clients')">
                       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                       <span>Find Clients</span>
                   </li>
 
-                  <li th:replace="::menuItem ('/workers/2/clients/find','clients','find clients','search','Find clients')">
+                  <li sec:authorize="isAuthenticated()" th:replace="::menuItem ('/workers/2/clients/find','clients','find clients','search','Find clients')">
                       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                       <span>Find Clients</span>
                   </li>
 
-                  <li th:replace="::menuItem ('/oups','error','trigger a RuntimeException to see how it is handled','warning-sign','Error')">
+                  <li sec:authorize="hasRole('ADMIN')" th:replace="::menuItem ('/oups','error','trigger a RuntimeException to see how it is handled','warning-sign','Error')">
                       <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
                       <span>Error</span>
                   </li>
 
                   <li>
                       <form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}">
-                          <button class="btn btn-outline-danger my-2 my-sm-0 btn-sm" type="submit">Logout</button>
+                          <button sec:authorize="isAuthenticated()" class="btn btn-outline-danger my-2 my-sm-0 btn-sm" type="submit">Logout</button>
+                          <button sec:authorize="isAnonymous()" th:href="@{~/login}" class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">Login</button>
                       </form>
                   </li>
 
