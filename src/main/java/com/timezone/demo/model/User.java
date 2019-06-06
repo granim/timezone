@@ -3,9 +3,7 @@ package com.timezone.demo.model;
 import lombok.Builder;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -31,6 +29,12 @@ public class User{
 
     @Column(nullable = false, name = "password")
     private String password;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Client> clients = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Coworker> coworkers = new HashSet<>();
 
     private int active;
 
