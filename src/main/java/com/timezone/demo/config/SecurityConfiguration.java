@@ -41,19 +41,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 /*----------permit all users to view the home page-------*/
-                .antMatchers("/index.html").permitAll()
+                .antMatchers("/index.html",
+                             "/js/**",
+                             "/css/**",
+                             "/images/**",
+                             "/webjars/**",
+                             "/login.html").permitAll()
                 /*------protect all folders and their pages*/
                 .antMatchers( "/workers/**", "/coworkers/**", "/clients/**", "/fragments/**").authenticated()
                 /*----------protect methods inside your controllers----------*/
-                .antMatchers("/api/public/processFindForm").authenticated()
-                .antMatchers("/api/public/users").hasRole("ADMIN")
+               /* .antMatchers("/api/public/processFindForm").authenticated()*/
+             /*   .antMatchers("/api/public/users").hasRole("ADMIN")*/
                 .and()
                 //Replace basic with form based Auth
                 /*.httpBasic();*/
                 .formLogin()
                 .loginPage("/login").permitAll()
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
+                .logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
                 .and()
                 .rememberMe()
                  .and()
