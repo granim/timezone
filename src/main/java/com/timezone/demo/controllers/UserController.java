@@ -1,16 +1,11 @@
 package com.timezone.demo.controllers;
 
-import com.timezone.demo.model.User;
 import com.timezone.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.validation.Valid;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/users")
 @Controller
@@ -29,7 +24,7 @@ public class UserController {
         dataBinder.setDisallowedFields("id");
     }
 
-    @RequestMapping("/find")
+   /* @RequestMapping("/find")
     public String findUser(Model model){
         model.addAttribute("user", User.builder().build());
         return "users/findUsers";
@@ -73,6 +68,6 @@ public class UserController {
             User savedUser = userService.save(user);
             return "redirect:/users/" + savedUser.getId();
         }
-    }
+    }*/
 
 }

@@ -33,9 +33,20 @@ public class IndexController {
     }
 
 
-    @GetMapping
+    /*@GetMapping
     public String login(){
         return "login";
+    }*/
+
+    @GetMapping
+    public String login(Model model){
+        return "login";
     }
+
+    @GetMapping("/user")
+    public String userIndex() {
+        return "user/index";
+    }
+
 
 }

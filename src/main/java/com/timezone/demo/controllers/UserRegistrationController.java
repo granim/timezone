@@ -3,6 +3,7 @@ package com.timezone.demo.controllers;
 import com.timezone.demo.dto.UserRegistrationDto;
 import com.timezone.demo.model.User;
 import com.timezone.demo.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,9 +18,10 @@ import javax.validation.Valid;
 @RequestMapping("/registration")
 public class UserRegistrationController {
 
-
+    @Autowired
    private UserService userService;
 
+   @ModelAttribute("user")
    public UserRegistrationDto userRegistrationDto() {
        return new UserRegistrationDto();
    }
@@ -33,16 +35,17 @@ public class UserRegistrationController {
    public String registerUserAccount(@ModelAttribute("user") @Valid UserRegistrationDto userDto, BindingResult result) {
 
        User existing = userService.findByEmail(userDto.getEmail());
+
        if(existing != null){
-           result.rejectValue("email", null, "An anncount already exist with that email");
+           result.rejectValue("email", null, "An account already exist with that email");
        }
 
        if(result.hasErrors()){
            return "registration";
        }
 
-       userService.save((userDto));
+       userService.save(userDto);
        return "redirect:/registration?success";
    }
-   
+
 }

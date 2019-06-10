@@ -2,7 +2,6 @@ package com.timezone.demo.bootstrap;
 
 import com.timezone.demo.model.Client;
 import com.timezone.demo.model.Coworker;
-import com.timezone.demo.model.User;
 import com.timezone.demo.model.Worker;
 import com.timezone.demo.repositories.UserRepository;
 import com.timezone.demo.services.ClientService;
@@ -100,9 +99,9 @@ public class DataLoader implements CommandLineRunner {
         workerService.save(grant);
         workerService.save(workerTwo);
         System.out.println("Loaded in Worker");
-        userRepository.deleteAll();
 
-        User userOne = new User();
+
+        /*User userOne = new User();
         userOne.setActive(1);
         userOne.setPassword(passwordEncoder.encode("123"));
         userOne.setUserName("kim");
@@ -111,7 +110,7 @@ public class DataLoader implements CommandLineRunner {
         userRepository.save(userOne);
         System.out.println("added in User");
         System.out.println(userService.findByUserName("kim"));
-        System.out.println(userRepository.findByUserName("kim"));
+        System.out.println(userRepository.findByUserName("kim"));*/
     }
 
 
