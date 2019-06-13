@@ -45,15 +45,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                              "/css/**",
                              "/images/**",
                              "/webjars/**",
-                             "/login.html").permitAll()
+                             "/login.html",
+                              "/console/**",
+                               "/templates/**").permitAll()
                 /*------protect all folders and their pages*/
-                .antMatchers( "/workers/**", "/coworkers/**", "/clients/**", "/fragments/**").authenticated()
-                /*----------protect methods inside your controllers----------*/
-               /* .antMatchers("/api/public/processFindForm").authenticated()*/
-             /*   .antMatchers("/api/public/users").hasRole("ADMIN")*/
+                .antMatchers( "/workers/**", "/coworkers/**", "/clients/**", "/fragments/**", "users/**").authenticated()
+
                 .and()
-                //Replace basic with form based Auth
-                /*.httpBasic();*/
                 .formLogin()
                 .loginPage("/login").permitAll()
                 .and()
@@ -63,6 +61,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
                 .and()
                 .rememberMe()
+                .and()
+                .headers().frameOptions().disable()
                  .and()
                 //TODO fix csrf disable
                 //Disables in order to perform CRUD operations

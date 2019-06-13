@@ -16,14 +16,13 @@ import java.util.TimeZone;
 public class Client extends BaseEntity {
 
     @Builder
-    public Client(Long id, String companyName, String address, String city, String telephone, TimeZone timeZone, Worker worker) {
+    public Client(Long id, String companyName, String address, String city, String telephone, TimeZone timeZone) {
         super(id);
         this.companyName = companyName;
         this.address = address;
         this.city = city;
         this.telephone = telephone;
         this.timeZone = timeZone;
-        this.worker = worker;
     }
 
     @Column(name = "company_name")
@@ -36,27 +35,18 @@ public class Client extends BaseEntity {
     private String telephone;
     @Column(name = "timeZone")
     private TimeZone timeZone;
-    @Enumerated(value = EnumType.STRING)
-    private TimeZoneList timeZoneList;
-
-    public TimeZoneList getTimeZoneList() {
-        return timeZoneList;
-    }
-
-    public void setTimeZoneList(TimeZoneList timeZoneList) {
-        this.timeZoneList = timeZoneList;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "worker_id")
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    private Worker worker;
-
+ 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private User user;
 
-
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
     public TimeZone getTimeZone() {
         return timeZone;
     }
@@ -97,14 +87,6 @@ public class Client extends BaseEntity {
         this.telephone = telephone;
     }
 
-    public Worker getWorker() {
-        return worker;
-    }
-
-    public void setWorker(Worker worker) {
-        this.worker = worker;
-    }
-
     @Override
     public String toString() {
         return "Client{" +
@@ -112,7 +94,6 @@ public class Client extends BaseEntity {
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", telephone='" + telephone + '\'' +
-                ", workers=" + worker +
                 '}';
     }
 

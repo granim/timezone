@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body}, 'workers')}">
 <head>
     <meta charset="UTF-8">
-    <title>List of Pet Owners</title>
+    <title>List of Placeholders</title>
 </head>
 <body>
 <h2 th:text="'List of Owners'">Owner List</h2>
@@ -15,12 +15,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="worker : ${workers}">
-        <td th:text="${worker.id}">1</td>
-        <td th:text="${worker.firstName}">Joe</td>
-        <td th:text="${worker.lastName}">Buck</td>
-        <td th:text="${worker.telephone}">321-868-5566
-        <td th:text="${worker.coworkers}">Coworkers</td>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}">1</td>
+        <td th:text="${user.firstName}">Joe</td>
+        <td th:text="${user.lastName}">Buck</td>
+        <td th:text="${user.coworkers}">Coworkers</td>
     </tr>
     </tbody>
 </table>

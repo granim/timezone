@@ -1,7 +1,5 @@
 package com.timezone.demo.services.map;
 
-import com.timezone.demo.model.Client;
-import com.timezone.demo.model.Coworker;
 import com.timezone.demo.model.Worker;
 import com.timezone.demo.services.ClientService;
 import com.timezone.demo.services.CoWorkerService;
@@ -24,7 +22,6 @@ public class WorkerMapService extends AbstractMapService<Worker, Long> implement
         this.coWorkerService = coWorkerService;
     }
 
-
     @Override
     public Set<Worker> findAll() {
         return super.findAll();
@@ -35,34 +32,9 @@ public class WorkerMapService extends AbstractMapService<Worker, Long> implement
         return super.findById(id);
     }
 
-
     @Override
-    public Worker save(Worker object) {
-            Worker worker = null;
-            if(object != null) {
-                if(object.getCoworkers() != null) {
-                    object.getCoworkers().forEach(coworker -> {
-                        if(coworker.getId() != null) {
-                            Coworker saveCoworker = coWorkerService.save(coworker);
-                            coworker.setId(saveCoworker.getId());
-                        } else {
-                            throw new RuntimeException("Coworker id is required");
-                        }
-                    });
-                }
-                if(object.getClients() != null) {
-                    object.getClients().forEach(baseClient -> {
-                        if(baseClient.getId() != null) {
-                            Client savedClient = clientService.save(baseClient);
-                            baseClient.setId(savedClient.getId());
-                        } else {
-                            throw new RuntimeException("Baseclient id is required");
-                        }
-                    });
-                }
-                return super.save(object);
-            }
-        return null;
+    public Worker save(Worker object){
+        return super.save(object);
     }
 
     @Override

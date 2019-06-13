@@ -2,7 +2,8 @@ package com.timezone.demo.bootstrap;
 
 import com.timezone.demo.model.Client;
 import com.timezone.demo.model.Coworker;
-import com.timezone.demo.model.Worker;
+import com.timezone.demo.model.Role;
+import com.timezone.demo.model.User;
 import com.timezone.demo.repositories.UserRepository;
 import com.timezone.demo.services.ClientService;
 import com.timezone.demo.services.CoWorkerService;
@@ -12,6 +13,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.TimeZone;
 
 @Component
@@ -38,19 +40,19 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
-        Worker grant = new Worker();
+        User grant = new User();
         grant.setFirstName("James");
         grant.setLastName("Murray");
-        grant.setAddress("234 Debar");
-        grant.setCity("Melbourne");
-        grant.setTelephone("3216894");
+        grant.setRoles(Arrays.asList(new Role("ROLE_USER")));
+        grant.setEmail("grant@gmail.com");
+        grant.setPassword(passwordEncoder.encode("123"));
 
-        Worker workerTwo = new Worker();
-        workerTwo.setFirstName("Havi");
-        workerTwo.setLastName("Tram");
-        workerTwo.setAddress("3157 Brent");
-        workerTwo.setCity("Orlando");
-        workerTwo.setTelephone("31456987");
+        User userTwo = new User();
+        userTwo.setFirstName("Havi");
+        userTwo.setLastName("Tram");
+        userTwo.setRoles(Arrays.asList(new Role("ROLE_USER")));
+        userTwo.setEmail("a@gmail.com");
+        userTwo.setPassword(passwordEncoder.encode("123"));
 
         Client client1 = new Client();
         client1.setCompanyName("Telemundo");
@@ -58,18 +60,10 @@ public class DataLoader implements CommandLineRunner {
         client1.setCity("Tamps");
         client1.setAddress("234 Hulu");
         client1.setTimeZone(TimeZone.getTimeZone("America/New_York"));
-        client1.setWorker(grant);
+        client1.setUser(grant);
         clientService.save(client1);
-        grant.getClients().add(client1);
+        grant.addClient(client1);
 
-        /*Client client2 = new Client();
-        client2.setCompanyName("Texico");
-        client2.setTelephone("123 2334");
-        client2.setCity("Tampa");
-        client2.setAddress("234 Hulu Rd");
-        client2.setWorker(grant);
-        clientService.save(client2);
-        grant.getClients().add(client2);*/
 
         Coworker james = new Coworker();
 
@@ -78,9 +72,9 @@ public class DataLoader implements CommandLineRunner {
         james.setTelephone("4563214654");
         james.setCity("Orlando");
         james.setAddress("15698 Set Into Drive");
-        james.setWorker(grant);
+        james.setUser(grant);
         coWorkerService.save(james);
-        grant.getCoworkers().add(james);
+        grant.addCoworker(james);
 
         Coworker john = new Coworker();
 
@@ -89,15 +83,15 @@ public class DataLoader implements CommandLineRunner {
         john.setTelephone("4563214654");
         john.setCity("Orlando");
         john.setAddress("15698 Set Into Drive");
-        john.setWorker(grant);
+        john.setUser(grant);
         coWorkerService.save(james);
         coWorkerService.save(john);
-        grant.getCoworkers().add(james);
-        grant.getCoworkers().add(john);
+        grant.addCoworker(james);
+        grant.addCoworker(john);
 
 
-        workerService.save(grant);
-        workerService.save(workerTwo);
+        userService.save(grant);
+        userService.save(userTwo);
         System.out.println("Loaded in Worker");
 
 

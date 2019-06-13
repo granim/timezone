@@ -1,11 +1,9 @@
 package com.timezone.demo.controllers;
 
 import com.timezone.demo.model.Coworker;
-import com.timezone.demo.model.Worker;
-import com.timezone.demo.repositories.CoWorkerRepository;
-import com.timezone.demo.repositories.WorkerRepository;
+import com.timezone.demo.model.User;
 import com.timezone.demo.services.CoWorkerService;
-import com.timezone.demo.services.WorkerService;
+import com.timezone.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,29 +18,27 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/workers/{workerId}")
+@RequestMapping("/users/{userId}")
 public class CoWorkerController {
 
     private static final String VIEWS_COWORKER_CREATE_OR_UPDATE_FORM = "coworkers/createOrUpdateCoworkerForm";
-   private final WorkerService workerService;
+   private final UserService userService;
    private final CoWorkerService coWorkerService;
-   private final WorkerRepository workerRepository;
-   private final CoWorkerRepository coWorkerRepository;
+
 
     @Autowired
-    public CoWorkerController(WorkerService workerService, CoWorkerService coWorkerService, WorkerRepository workerRepository, CoWorkerRepository coWorkerRepository) {
-        this.workerService = workerService;
+    public CoWorkerController(UserService userService, CoWorkerService coWorkerService) {
+        this.userService = userService;
         this.coWorkerService = coWorkerService;
-        this.workerRepository = workerRepository;
-        this.coWorkerRepository = coWorkerRepository;
+
     }
 
-    @ModelAttribute("worker")
-    public Worker findBaseUser(@PathVariable("workerId") Long workerId) {
-        return workerService.findById(workerId);
+    @ModelAttribute("user")
+    public User findBaseUser(@PathVariable("userId") Long userId) {
+        return userService.findById(userId);
     }
 
-    @InitBinder("worker")
+    @InitBinder("user")
     public void initBaseUserBinder(WebDataBinder dataBinder){
         dataBinder.setDisallowedFields("id");
     }
@@ -54,7 +50,7 @@ public class CoWorkerController {
     }
 
     @GetMapping("/coworkers")
-    public String processFindCoworkerForm(Coworker coworker, BindingResult result, Worker worker, Model model) {
+    public String processFindCoworkerForm(Coworker coworker, BindingResult result, User user, Model model) {
         if(coworker.getlName() == null) {
             coworker.setlName("");
         }
@@ -64,7 +60,7 @@ public class CoWorkerController {
             return "coworkers/findCoworkers";
         } else if (coworkeresults.size() == 1) {
             coworker = coworkeresults.get(0);
-            return "redirect:/workers/" + worker.getId() + "/coworkers/" + coworker.getId();
+            return "redirect:/users/" + user.getId() + "/coworkers/" + coworker.getId();
         } else {
             model.addAttribute("selections", coworkeresults);
             return "coworkers/coworkerList";
@@ -79,44 +75,44 @@ public class CoWorkerController {
     }
 
     @GetMapping("/coworkers/new")
-    public String initCreationForm(Worker worker, ModelMap model) {
+    public String initCreationForm(User user, ModelMap model) {
         Coworker coworker = new Coworker();
-        worker.addCoworker(coworker);
+        user.addCoworker(coworker);
         model.put("coworker", coworker);
         return VIEWS_COWORKER_CREATE_OR_UPDATE_FORM;
     }
 
     @PostMapping("/coworkers/new")
-    public String processCreationForm(Worker worker, @Valid Coworker coworker, BindingResult result, Model model) {
-        if (StringUtils.hasLength(coworker.getfName()) && coworker.isNew() && worker.getCoworker(coworker.getfName(), true) != null){
+    public String processCreationForm(User user, @Valid Coworker coworker, BindingResult result, Model model) {
+        if (StringUtils.hasLength(coworker.getfName()) && coworker.isNew() && user.getCoworker(coworker.getfName(), true) != null){
             result.rejectValue("fName", "duplicate", "already exists");
         }
-        worker.addCoworker(coworker);
+        user.addCoworker(coworker);
         if(result.hasErrors()) {
             model.addAttribute("coworker", coworker);
             return VIEWS_COWORKER_CREATE_OR_UPDATE_FORM;
         } else {
             coWorkerService.save(coworker);
-            return "redirect:/workers/{workerId}";
+            return "redirect:/users/{userId}";
         }
     }
 
-    @GetMapping("coworkers/{coworkerId}/edit")
+    @GetMapping("/coworkers/{coworkerId}/edit")
     public String initUpdateForm(@PathVariable Long coworkerId, Model model){
         model.addAttribute("coworker" , coWorkerService.findById(coworkerId));
         return VIEWS_COWORKER_CREATE_OR_UPDATE_FORM;
     }
 
     @PostMapping("/coworkers/{coworkerId}/edit")
-    public String processUpdateForm(@Valid Coworker coworker, BindingResult result, Worker worker, Model model) {
+    public String processUpdateForm(@Valid Coworker coworker, BindingResult result, User user, Model model) {
         if(result.hasErrors()) {
-            coworker.setWorker(worker);
+            coworker.setUser(user);
             model.addAttribute("coworker", coworker);
             return VIEWS_COWORKER_CREATE_OR_UPDATE_FORM;
         } else {
-            worker.addCoworker(coworker);
+            user.addCoworker(coworker);
             coWorkerService.save(coworker);
-            return "redirect:/workers/" + worker.getId();
+            return "redirect:/users/" + user.getId();
         }
     }
 

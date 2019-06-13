@@ -20,7 +20,7 @@ public class UserSDJpaService {
     }
 
 
-    public User findByUserName(String firstName) {
+    public User findByFirstName(String firstName) {
         return userRepository.findByFirstName(firstName);
     }
 
