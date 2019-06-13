@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'user')}">
+
+<body>
+<!--/*thymesBar id="User" type="timezone.demo.model.User"*/-->
+<h2>Worker Information</h2>
+
+<table class="table table-striped" th:object="${user}">
+    <tr>
+        <th>Name</th>
+        <td><b th:text="*{firstName + ' ' + lastName}"></b></td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td th:text="${user.email}" /></td>
+    </tr>
+
+    <tr>
+        <th>Coworkers</th>
+    <tr th:each="coworker:${user.coworkers}">
+        <td th:text="${coworker.fName}"> /td>
+    </tr>
+    <tr>
+        <th>Clients</th>
+    <tr th:each="client: ${user.clients}">
+        <td th:text="${client.companyName}"></td>
+    </tr>
+    </tr>
+
+</table>
+
+
+
+<a th:href="@{{id}/edit(id=${user.id})}" class="btn btn-default">Edit
+    My Details</a>
+<a th:href="@{{id}/coworkers/new(id=${user.id})}" class="btn btn-default">Add
+    New Coworker</a>
+<a th:href="@{{id}/clients/new(id=${user.id})}" class="btn btn-default">Add
+    New Client</a>
+<br />
+<br />
+<br />
+
+</body>
+
+</html>

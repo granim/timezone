@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -15,14 +14,14 @@ import javax.persistence.*;
 public class Coworker  extends BaseEntity {
 
     @Builder
-    public Coworker(Long id, String fName, String lName, String address, String city, String telephone, Worker worker) {
+    public Coworker(Long id, String fName, String lName, String address, String city, String telephone, User user) {
        super(id);
         this.fName = fName;
         this.lName = lName;
         this.address = address;
         this.city = city;
         this.telephone = telephone;
-        this.worker = worker;
+        this.user = user;
     }
 
     @Column(name = "address")
@@ -36,10 +35,6 @@ public class Coworker  extends BaseEntity {
     private String fName;
     @Column(name = "lName")
     private String lName;
-
-    @ManyToOne
-    @JoinColumn(name = "worker_id")
-    private Worker worker;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -69,12 +64,12 @@ public class Coworker  extends BaseEntity {
         this.telephone = telephone;
     }
 
-    public Worker getWorker() {
-        return worker;
+    public User getUser() {
+        return user;
     }
 
-    public void setWorker(Worker worker) {
-        this.worker = worker;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getfName() {

@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'users')}">
+
+<body>
+
+<h2>Your Information</h2>
+
+<!--/*@thymesVar id="user" type="com.timezone.demo.model.User"*/-->
+
+<form th:object="${user}" class="form-horizontal" id="add-user-form" method="post">
+
+    <div class="form-group has-feedback">
+        <input
+                th:replace="~{fragments/inputField :: input ('First Name', 'firstName', 'text')}" />
+        <input
+                th:replace="~{fragments/inputField :: input ('Last Name', 'lastName', 'text')}" />
+        <input
+                th:replace="~{fragments/inputField :: input ('Email', 'email', 'text')}" />
+        <input
+                th:replace="~{fragments/inputField :: input ('Password', 'password', 'password')}" />
+
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+
+           <!-- <a th:href="@{{id}/edit(id=${user.id})}" class="btn btn-default">Edit
+                My Information</a>
+                ${user['new']} ? 'Add Test' :-->
+            <button
+                    th:with="text= 'Update Information'"
+                    class="btn btn-default" type="submit" th:text="${text}">Edit
+                Information</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

@@ -5,8 +5,8 @@
     <title>List of Vets</title>
 </head>
 <body>
-<!--/*@thymesVar id="Worker" type="com.timezone.demo.model.Worker"*/-->
-<h2>Workers</h2>
+<!--/*@thymesVar id="User" type="com.timezone.demo.model.User"*/-->
+<h2>My Details</h2>
 
 <table class="glyphicon glyphicon-calendar">
     <tr>
@@ -14,12 +14,14 @@
         <th>Name</th>
         <th>Age</th>
     </tr>
-    <tr th:each="worker : ${workers}">
-        <td th:text="${worker.id}"></td>
-        <td th:text="${worker.getFirstName()}"></td>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getFirstName()}"></td>
+      <!--  <td th:text="${worker.getFirstName()}"></td>
         <td th:text="${worker.getLastName()}"></td>
-        <td th:text="${worker.getAddress()}"></td>
+        <td th:text="${worker.getAddress()}"></td>-->
     </tr>
+
 </table>
 <table class="glyphicon glyphicon-calendar">
     <tr>

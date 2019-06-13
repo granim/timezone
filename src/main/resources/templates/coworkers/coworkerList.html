@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'workers')}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'users')}">
 
 <body>
 
@@ -17,13 +17,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="coworker : ${selections}">
+    <tr th:each="coworker : ${selections }">
         <td>
-            <a th:href="@{/workers/__${worker.id}__/coworkers/__${coworker.id}__}" th:text="${coworker.fName + ' ' + coworker.lName}"/></a>
+            <a th:href="@{/users/__${user.id != null ? user.id: 'Not Found'}__/coworkers/__${coworker.id}__}" th:text="${coworker.fName + ' ' + coworker.lName}"/></a>
         </td>
-        <td th:text="${coworker.address}"/>
-        <td th:text="${coworker.city}"/>
-        <td th:text="${coworker.telephone}"/>
+        <td th:text="${coworker.address != null ? user.coworker.address : 'Not Found'}"/>
+        <td th:text="${coworker.city != null ? user.coworker.city : 'Not Found'}"/>
+        <td th:text="${coworker.telephone != null ? user.coworker.telephone : 'Not Found'}"/>
 
     </tr>
     </tbody>

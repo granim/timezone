@@ -33,11 +33,10 @@ public class WorkerController {
         dataBinder.setDisallowedFields("id");
     }
 
-
     @RequestMapping("/find")
     public String findUser(Model model){
         model.addAttribute("worker", Worker.builder().build());
-        return "workers/findUsers";
+        return "findWorkers";
     }
 
     @GetMapping
@@ -48,7 +47,7 @@ public class WorkerController {
         List<Worker> results = workerService.findAllByLastNameLike("%" + worker.getLastName() + "%");
         if(results.isEmpty()) {
             result.rejectValue("lastName", "notFound", "not found");
-            return "workers/findUsers";
+            return "findWorkers";
         } else if (results.size() == 1) {
             worker = results.get(0);
             return "redirect:/workers/" + worker.getId();

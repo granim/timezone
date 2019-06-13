@@ -1,11 +1,16 @@
 package com.timezone.demo.model;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,6 +30,13 @@ public class User {
                     name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
 
+    //TODO creat method to expose client and coworker list, make each private
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    public Set<Client> clients = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    public Set<Coworker> coworkers = new HashSet<>();
+
     public User() {
     }
 
@@ -35,12 +47,19 @@ public class User {
         this.password = password;
     }
 
-    public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
+    @Builder
+    public User(String firstName, String lastName, String email, String password, Collection<Role> roles, Set<Client> clients, Set<Coworker> coworkers) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.roles = roles;
+        if(clients == null || clients.size() > 0) {
+            this.clients = clients;
+        }
+        if(coworkers == null || coworkers.size() > 0) {
+            this.coworkers = coworkers;
+        }
     }
 
     public Long getId() {
@@ -90,6 +109,77 @@ public class User {
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
+
+    public Client getBaseClient(String name) {
+        return getBaseClient(name, false);
+    }
+
+
+    protected Set<Coworker> getCoworkersInternal(){
+        if(this.coworkers == null) {
+            this.coworkers = new HashSet<>();
+        }
+        return this.coworkers;
+    }
+
+    protected void setCoworkersInternal(Set<Coworker> coworkers){
+        this.coworkers = coworkers;
+    }
+
+    public void addCoworker(Coworker coworker){
+        if(coworker.isNew()){
+            getCoworkersInternal().add(coworker);
+        }
+        coworker.setUser(this);
+    }
+
+    protected Set<Client> getClientsInternal(){
+        if(this.clients == null) {
+            this.clients = new HashSet<>();
+        }
+        return this.clients;
+    }
+
+    public void addClient(Client client){
+        if(client.isNew()){
+            getClientsInternal().add(client);
+        }
+        client.setUser(this);
+    }
+
+    public Client getBaseClient(String name, boolean ignoreNew){
+        name = name.toLowerCase();
+        for(Client client : clients) {
+            if(!ignoreNew || !client.isNew()) {
+                String compName = client.getCompanyName();
+                compName = compName.toLowerCase();
+                if(compName.equals(name)) {
+                    return client;
+                }
+            }
+        }
+        return null;
+    }
+    public Coworker getCoworker(String name) {
+        return getCoworker(name, false);
+    }
+
+    public Coworker getCoworker(String name, boolean ignoreNew){
+        name = name.toLowerCase();
+        for(Coworker coworker : coworkers) {
+            if(!ignoreNew || !coworker.isNew()) {
+                String compName = coworker.getfName();
+                compName = compName.toLowerCase();
+                if(compName.equals(name)) {
+                    return coworker;
+                }
+            }
+        }
+        return null;
+    }
+
+
+
 
     @Override
     public String toString() {

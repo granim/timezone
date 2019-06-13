@@ -11,12 +11,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -53,6 +55,23 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    @Override
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User update(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User findById(Long id) {
+      User user =  userRepository.findById(id).orElse(null);
+       return user;
+    }
+
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
@@ -60,7 +79,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUserName(String firstName) throws UsernameNotFoundException{
+    public User findByFirstName(String firstName) throws UsernameNotFoundException{
         User user = userRepository.findByFirstName(firstName);
         if(user == null) {
             throw new UsernameNotFoundException("Invalid Username");

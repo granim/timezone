@@ -33,11 +33,6 @@ public class IndexController {
     }
 
 
-    /*@GetMapping
-    public String login(){
-        return "login";
-    }*/
-
     @GetMapping
     public String login(Model model){
         return "login";

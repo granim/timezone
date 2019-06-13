@@ -1,11 +1,10 @@
 package com.timezone.demo.controllers;
 
 import com.timezone.demo.model.Client;
-import com.timezone.demo.model.Worker;
+import com.timezone.demo.model.User;
 import com.timezone.demo.repositories.ClientRepository;
-import com.timezone.demo.repositories.WorkerRepository;
 import com.timezone.demo.services.ClientService;
-import com.timezone.demo.services.WorkerService;
+import com.timezone.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,29 +19,27 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/workers/{workerId}")
+@RequestMapping("/users/{userId}")
 public class ClientController {
 
     private static final String VIEWS_CLIENT_CREATE_OR_UPDATE_FORM = "clients/createOrUpdateClientForm";
-    private final WorkerService workerService;
+    private final UserService userService;
     private final ClientService clientService;
-    private final WorkerRepository workerRepository;
     private final ClientRepository clientRepository;
 
     @Autowired
-    public ClientController(WorkerService workerService, ClientService clientService, WorkerRepository workerRepository, ClientRepository clientRepository) {
-        this.workerService = workerService;
+    public ClientController(UserService userService, ClientService clientService, ClientRepository clientRepository) {
+        this.userService = userService;
         this.clientService = clientService;
-        this.workerRepository = workerRepository;
         this.clientRepository = clientRepository;
     }
 
-    @ModelAttribute("worker")
-    public Worker findBaseUser(@PathVariable("workerId")Long workerId){
-        return workerService.findById(workerId);
+    @ModelAttribute("user")
+    public User findBaseUser(@PathVariable("userId") Long userId) {
+        return userService.findById(userId);
     }
 
-    @InitBinder("worker")
+    @InitBinder("user")
     public void initBaseUserBinder(WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("id");
     }
@@ -54,7 +51,7 @@ public class ClientController {
     }
 
     @GetMapping("/clients")
-    public String processFindClientForm(Client client, BindingResult result, Model model, Worker worker) {
+    public String processFindClientForm(Client client, BindingResult result, Model model, User user) {
         if(client.getCompanyName() == null) {
             client.setCompanyName("");
         }
@@ -64,7 +61,7 @@ public class ClientController {
             return "clients/findClients";
         } else if (clientResults.size() == 1) {
             client = clientResults.get(0);
-            return "redirect:/workers/"  + worker.getId() + "/clients/" + client.getId();
+            return "redirect:/users/"  + user.getId() + "/clients/" + client.getId();
         } else {
             model.addAttribute("selections", clientResults);
             return "clients/clientList";
@@ -81,25 +78,25 @@ public class ClientController {
 
 
     @GetMapping("/clients/new")
-    public String initCreationForm(Worker worker, ModelMap model){
+    public String initCreationForm(User user, ModelMap model){
         Client client = new Client();
-        worker.addClient(client);
+        user.addClient(client);
         model.put("client", client);
                 return VIEWS_CLIENT_CREATE_OR_UPDATE_FORM;
     }
 
     @PostMapping("/clients/new")
-    public String processCreationForm(Worker worker, @Valid Client client, BindingResult result, Model model){
-        if(StringUtils.hasLength(client.getCompanyName()) && client.isNew() && worker.getBaseClient(client.getCompanyName(), true) != null){
+    public String processCreationForm(User user, @Valid Client client, BindingResult result, Model model){
+        if(StringUtils.hasLength(client.getCompanyName()) && client.isNew() && user.getBaseClient(client.getCompanyName(), true) != null){
             result.rejectValue("companyName", "duplicate", "already exists");
         }
-        worker.addClient(client);
+        user.addClient(client);
         if(result.hasErrors()){
             model.addAttribute("client", client);
             return VIEWS_CLIENT_CREATE_OR_UPDATE_FORM;
         } else {
             clientService.save(client);
-            return "redirect:/workers/{workerId}";
+            return "redirect:/users/{userId}";
         }
     }
 
@@ -110,15 +107,15 @@ public class ClientController {
     }
 
     @PostMapping("clients/{clientId}/edit")
-    public String processUpdateForm(@Valid Client client, BindingResult result, Worker worker, Model model) {
+    public String processUpdateForm(@Valid Client client, BindingResult result, User user, Model model) {
         if(result.hasErrors()) {
-            client.setWorker(worker);
+            client.setUser(user);
             model.addAttribute("client", client);
             return VIEWS_CLIENT_CREATE_OR_UPDATE_FORM;
         }
-          worker.addClient(client);
+          user.addClient(client);
           clientService.save(client);
-          return "redirect:/workers/" + worker.getId();
+          return "redirect:/users/" + user.getId();
     }
 
 
