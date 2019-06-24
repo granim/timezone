@@ -25,7 +25,6 @@ public class CoWorkerController {
    private final UserService userService;
    private final CoWorkerService coWorkerService;
 
-
     @Autowired
     public CoWorkerController(UserService userService, CoWorkerService coWorkerService) {
         this.userService = userService;
@@ -42,6 +41,7 @@ public class CoWorkerController {
     public void initBaseUserBinder(WebDataBinder dataBinder){
         dataBinder.setDisallowedFields("id");
     }
+
 
     @RequestMapping("/coworkers/find")
     public String findCoworker(Model model){
@@ -115,10 +115,6 @@ public class CoWorkerController {
             return "redirect:/users/" + user.getId();
         }
     }
-
-
-
-
 
 
 

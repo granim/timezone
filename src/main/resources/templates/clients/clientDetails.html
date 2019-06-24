@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{fragments/layout :: layout (~{::body},'user')}">
+      th:replace="~{fragments/layout :: layout (~{::body},'client')}">
 
 <body>
 <!--/*thymesBar id="Client" type="timezone.demo.model.Client"*/-->
 <h2>Client Information</h2>
+<span th:object="${session.user}"> </span>
+<span><p>Hello: <span th:text="*{user.firstName}">Pepper</span></p></span>
+
 
 <table class="table table-striped" th:object="${client}">
     <tr>

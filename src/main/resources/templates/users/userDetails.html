@@ -5,7 +5,11 @@
 
 <body>
 <!--/*thymesBar id="User" type="timezone.demo.model.User"*/-->
-<h2>Worker Information</h2>
+<h2>Your Information</h2>
+
+                     <span th:object="${session.user}"> </span>
+                  <span><p>Surname: <span th:text="*{user.id}">Pepper</span></p></span>
+
 
 <table class="table table-striped" th:object="${user}">
     <tr>

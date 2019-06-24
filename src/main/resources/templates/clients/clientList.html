@@ -6,6 +6,8 @@
 
 <h2>Clients</h2>
 
+
+<li sec:authorize="isAuthenticated()" th:object="${user}" th:text="${user.id}">Name</li>
 <table id="vets" class="table table-striped">
     <thead>
     <tr>

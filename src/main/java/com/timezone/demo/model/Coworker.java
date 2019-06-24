@@ -37,7 +37,7 @@ public class Coworker  extends BaseEntity {
     private String lName;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "User_id")
     private User user;
 
     public String getAddress() {

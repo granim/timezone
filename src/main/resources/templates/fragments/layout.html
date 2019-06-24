@@ -1,6 +1,6 @@
 <!doctype html>
 <html th:fragment="layout (template, menu)"
-    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.w3.org/1999/xhtml">
 
   <head>
 
@@ -19,11 +19,9 @@
     <![endif]-->
 
     <link rel="stylesheet" th:href="@{/resources/css/petclinic.css}"/>
-
   </head>
 
 <body>
-
   <nav class="navbar navbar-default" role="navigation">
       <div class="container">
           <div class="navbar-header">
@@ -36,7 +34,8 @@
               </button>
           </div>
           <div class="navbar-collapse collapse" id="main-navbar">
-            <h2> <div th:text="${#authentication.name}"></h2>
+              <h2> <div th:text="${#authentication.name}">Email</div></h2>
+
               <ul class="nav navbar-nav navbar-right">
   
                   <li th:fragment="menuItem (path,active,title,glyph,text)" class="active" th:class="${active==menu ? 'active' : ''}">
@@ -51,12 +50,12 @@
                       <span>Home</span>
                   </li>
 
-                  <li sec:authorize="isAuthenticated()" th:replace="::menuItem ( '/users/2/coworkers/find','coworkers','find coworkers','search','Find coworkers')">
+                     <li sec:authorize="isAuthenticated()" th:object="${username}" th:replace="::menuItem('/users/' + *{username} + '/coworkers/find', 'coworkers', 'find coworkers', 'search', 'Find coworkers')">
                       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                       <span>Find Coworkers</span>
-                  </li>
+                    </li>
 
-                  <li sec:authorize="isAuthenticated()" th:replace="::menuItem ('/users/2/clients/find','clients','find clients','search','Find clients')">
+                  <li sec:authorize="isAuthenticated()" th:object="${username}"  th:replace="::menuItem ('/users/' + *{username} + '/clients/find','clients','find clients','search','Find clients')">
                       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                       <span>Find Clients</span>
                   </li>
