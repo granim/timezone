@@ -1,16 +1,15 @@
 package com.timezone.demo.model;
 
 import lombok.Builder;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-public class User implements UserDetails{
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -63,34 +62,8 @@ public class User implements UserDetails{
         }
     }
 
-
     public String getPassword() {
         return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return getFirstName();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 
     public void setPassword(String password) {
@@ -206,15 +179,6 @@ public class User implements UserDetails{
         this.email = email;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-       List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Role roles: getRoles()) {
-            GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + roles);
-            authorities.add(authority);
-        }
-        return authorities;
-    }
 
     @Override
     public String toString() {

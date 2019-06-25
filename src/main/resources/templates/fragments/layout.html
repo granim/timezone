@@ -50,12 +50,12 @@
                       <span>Home</span>
                   </li>
 
-                     <li sec:authorize="isAuthenticated()" th:object="${username}" th:replace="::menuItem('/users/' + *{username} + '/coworkers/find', 'coworkers', 'find coworkers', 'search', 'Find coworkers')">
+                     <li sec:authorize="isAuthenticated()" th:object="${userId}" th:replace="::menuItem('/users/' + *{userId} + '/coworkers/find', 'coworkers', 'find coworkers', 'search', 'Find coworkers')">
                       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                       <span>Find Coworkers</span>
                     </li>
 
-                  <li sec:authorize="isAuthenticated()" th:object="${username}"  th:replace="::menuItem ('/users/' + *{username} + '/clients/find','clients','find clients','search','Find clients')">
+                  <li sec:authorize="isAuthenticated()" th:object="${userId}"  th:replace="::menuItem ('/users/' + *{userId} + '/clients/find','clients','find clients','search','Find clients')">
                       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                       <span>Find Clients</span>
                   </li>

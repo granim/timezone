@@ -6,6 +6,7 @@ import com.timezone.demo.repositories.ClientRepository;
 import com.timezone.demo.services.ClientService;
 import com.timezone.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -36,7 +37,10 @@ public class ClientController {
 
     @ModelAttribute("user")
     public User findBaseUser(@PathVariable("userId") Long userId) {
-        return userService.findById(userId);
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User loggedUser = userService.findByEmail(user.getUsername());
+        Long loggedUserId = loggedUser.getId();
+        return userService.findById(loggedUserId);
     }
 
     @InitBinder("user")
@@ -49,6 +53,7 @@ public class ClientController {
         model.addAttribute("client", Client.builder().build());
         return "clients/findClients";
     }
+
 
     @GetMapping("/clients")
     public String processFindClientForm(Client client, BindingResult result, Model model, User user) {
@@ -117,8 +122,5 @@ public class ClientController {
           clientService.save(client);
           return "redirect:/users/" + user.getId();
     }
-
-
-
 
 }

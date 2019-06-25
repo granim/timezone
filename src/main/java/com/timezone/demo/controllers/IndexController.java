@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpSession;
-
 @Controller
 public class IndexController {
 
@@ -30,29 +28,15 @@ public class IndexController {
         this.userService = userService;
     }
 
-    @RequestMapping({"", "/", "index", "index.html", "layout.html", "/layout.html"})
-    public String index(Model model){
-      User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-      User user1 = user;
-       com.timezone.demo.model.User loggedUser = userService.findByEmail(user1.getUsername());
+    @RequestMapping({"", "/", "index", "index.html"})
+    public String layout(Model model){
+     User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+       com.timezone.demo.model.User loggedUser = userService.findByEmail(user.getUsername());
        Long id = loggedUser.getId();
-        model.addAttribute("username", id);
-        model.addAttribute("workers", workerRepository.findAll());
+        model.addAttribute("userId", id);
         model.addAttribute("users", userRepository.findAll());
-
         return "index";
     }
-
-    @RequestMapping({ "clientDetails", "/clientDetails.html", "layout.html", "/layout.html"})
-    public String clientDetails(Model model){
-        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user1 = user;
-        com.timezone.demo.model.User loggedUser = userService.findByEmail(user1.getUsername());
-        Long id = loggedUser.getId();
-        model.addAttribute("username", id);
-        return "clientDetails";
-    }
-
 
     @RequestMapping("/oops")
     public String oopsHandler(){
@@ -69,11 +53,6 @@ public class IndexController {
         return "user/index";
     }
 
-    @RequestMapping({ "/layout.html", "index.html"})
-    String index(HttpSession session, Long id) {
-        session.setAttribute("mySessionAttribute", userService.findById(id));
-        return "index";
-    }
 
     @InitBinder
     public void setAllowedFields(WebDataBinder dataBinder){
