@@ -1,12 +1,10 @@
-<html xmlns:th="http://www.thymeleaf.org">
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'home')}">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="UTF-8"/>
+    <title>Registraion</title>
 
-
-    <title>Registration</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
 </head>
 <body>
 <div class="container">

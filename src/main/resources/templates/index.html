@@ -1,17 +1,14 @@
-
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'home')}">
 
 <head>
     <meta charset="UTF-8"/>
     <title>Home Page</title>
-    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
 
 </head>
 <body class="col-auto">
-<!--/*@thymesVar id="User" type="com.timezone.demo.model.User"*/-->
+<!--/*@thymesVar id="User" type="com.model.User"*/-->
 <li sec:authorize="isAuthenticated()" th:object="${session}" th:text="${id}">Name</li>
-<h2 class=alert-light>My Details</h2>
+<h2 class="alert-light display-1">My Details</h2>
 
 <table class="table-primary table">
     <tr class="d-lg-table-row">
@@ -36,8 +33,7 @@
     </tr>
 </table>
 
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!--<script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>-->
+<script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
 </body>
 </html>
