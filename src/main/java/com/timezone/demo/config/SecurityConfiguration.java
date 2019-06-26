@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,18 +26,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                /*----------permit all users to view the home page-------*/
                 .antMatchers("/index.html",
-                             "/js/**",
-                             "/css/**",
+                             "/* .css",
+                             "/* .js",
                              "/images/**",
                              "/webjars/**",
-                             "/login.html",
                               "/console/**",
                                "/fragments/**"
-                               ).permitAll()
-                /*------protect all folders and their pages*/
+                               ).permitAll().anyRequest().permitAll()
                 .antMatchers( "/workers/**", "/coworkers/**", "/clients/**", "users/**").authenticated()
+                .and()
+                .authorizeRequests()
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
@@ -54,7 +54,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //Disables in order to perform CRUD operations
                  .csrf().disable();
 
-
     }
 
     @Bean
@@ -70,8 +69,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return auth;
     }
 
+
+    protected void configure(AuthenticationManagerBuilder auth, WebSecurity web) throws Exception {
+        auth.authenticationProvider(authenticationProvider());
+        web.ignoring().antMatchers("/resources/**").anyRequest();
+    }
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
+
 }

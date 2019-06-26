@@ -1,17 +1,20 @@
-<!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'home')}">
 
 <head>
     <meta charset="UTF-8"/>
     <title>Home Page</title>
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+
 </head>
-<body>
+<body class="col-auto">
 <!--/*@thymesVar id="User" type="com.timezone.demo.model.User"*/-->
 <li sec:authorize="isAuthenticated()" th:object="${session}" th:text="${id}">Name</li>
-<h2>My Details</h2>
+<h2 class=alert-light>My Details</h2>
 
-<table class="glyphicon glyphicon-calendar">
-    <tr>
+<table class="table-primary table">
+    <tr class="d-lg-table-row">
         <th>Id</th>
         <th>Name</th>
         <th>Age</th>
@@ -20,7 +23,7 @@
         <td th:text="${user.getId()}"></td>
         <td th:text="${user.getFirstName()}"></td>
     </tr>
-<tr th:object="${username}" th:text="${username}">Name</tr>
+<tr th:object="${userId}" th:text="${userId}">Name</tr>
 
 </table>
 
@@ -34,6 +37,7 @@
 </table>
 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!--<script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>-->
 </body>
 </html>
