@@ -1,7 +1,6 @@
 package com.controllers;
 
 import com.repositories.UserRepository;
-import com.repositories.WorkerRepository;
 import com.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,14 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
-    private final WorkerRepository workerRepository;
     private final UserRepository userRepository;
     private final UserService userService;
 
 
     @Autowired
-    public IndexController(WorkerRepository workerRepository, UserRepository userRepository, UserService userService) {
-        this.workerRepository = workerRepository;
+    public IndexController(UserRepository userRepository, UserService userService) {
         this.userRepository = userRepository;
         this.userService = userService;
     }
@@ -38,7 +35,7 @@ public class IndexController {
 
     @RequestMapping("/oops")
     public String oopsHandler(){
-        return "Sorry not implemented";
+        return "oops";
     }
 
     @GetMapping
