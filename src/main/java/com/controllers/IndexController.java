@@ -1,6 +1,6 @@
 package com.controllers;
 
-import com.repositories.UserRepository;
+
 import com.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,23 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
-    private final UserRepository userRepository;
     private final UserService userService;
 
-
     @Autowired
-    public IndexController(UserRepository userRepository, UserService userService) {
-        this.userRepository = userRepository;
+    public IndexController(UserService userService) {
         this.userService = userService;
     }
 
-    @RequestMapping({ "/", "index", "index.html"})
-    public String layout(Model model){
-     User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+   @GetMapping(path = { "/", "index", "index.html"})
+    public String Index(Model model){
+       User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
        com.model.User loggedUser = userService.findByEmail(user.getUsername());
        Long id = loggedUser.getId();
         model.addAttribute("userId", id);
-        model.addAttribute("users", userRepository.findAll());
         return "index";
     }
 
@@ -38,8 +34,10 @@ public class IndexController {
         return "oops";
     }
 
-    @GetMapping
-    public String login(Model model){
+
+
+    @GetMapping ("login")
+    public String login() {
         return "login";
     }
 

@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,11 +31,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/layout.html",
                         "/console/**",
                         "/fragments/**",
-                        "/resources/**",
+                        "/static/**",
                         "/css/**",
+                        "/META-INF/**",
                         "/images/**",
-                        "/webjars/**"
-                ).permitAll()
+                        "/webjars/**",
+                        "template.css",
+                        "/**/*.js", "/**/*.css"
+                ).permitAll().anyRequest().permitAll()
                 .and()
                 .authorizeRequests()
                 .antMatchers( "/workers/**", "/coworkers/**", "/clients/**", "users/**").authenticated()
@@ -51,8 +55,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 //TODO fix csrf disable
                 //Disables in order to perform CRUD operations
-                 .csrf().disable();
-
+                 .csrf().disable()
+                .headers().frameOptions().disable();
     }
 
     @Bean
@@ -71,6 +75,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
+    }
+
+
+
+    public void configure(WebSecurity web) {
+        web
+                .ignoring()
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**","/vendor/**","/fonts/**");
     }
 
 }

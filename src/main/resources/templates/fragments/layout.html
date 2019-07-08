@@ -13,8 +13,9 @@
 
     <title>TimeZone :: a Spring Framework Web Application</title>
 
-      <link type="text/css" rel="stylesheet" href="../../../META-INF/resources/css/styles.css">
-
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <!--     <script src="../../static/js/bootstrap.js" th:href="@{js/bootstrap.js}"></script>-->
+      <link href="/static/css/bootstrap.css" type="text/css" />
   </head>
 
 <body class="container">
@@ -30,7 +31,7 @@
               </button>
           </div>
           <div class="navbar-collapse collapse" id="main-navbar">
-              <h2> <div th:text="${#authentication.name}">Email</div></h2>
+             <!-- <h2> <div th:text="${#authentication.name}">Email</div></h2>-->
 
               <ul class="nav navbar-nav navbar-right">
   
@@ -82,7 +83,7 @@
         <div class="container">
           <div class="row">
             <div class="col-12 text-center">
-              <img src="../static/resources/images/spring-pivotal-logo.png" th:src="@{images/spring-pivotal-logo.png}"
+              <img src="/static/resources/images/spring-pivotal-logo.png" th:src="@{images/spring-pivotal-logo.png}"
                 alt="Sponsored by Pivotal"/></div>
           </div>
         </div>

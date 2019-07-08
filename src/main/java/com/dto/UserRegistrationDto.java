@@ -1,9 +1,7 @@
 package com.dto;
 
-
 import com.constraint.FieldMatch;
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.AssertTrue;
 
@@ -13,24 +11,18 @@ import javax.validation.constraints.AssertTrue;
 })
 public class UserRegistrationDto {
 
-    @NotEmpty
     private String firstName;
 
-    @NotEmpty
     private String lastName;
 
-    @NotEmpty
     private String password;
 
-    @NotEmpty
     private String confirmPassword;
 
     @Email
-    @NotEmpty
     private String email;
 
     @Email
-    @NotEmpty
     private String confirmEmail;
 
     @AssertTrue

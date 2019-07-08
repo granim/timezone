@@ -24,7 +24,6 @@ public class BaseEntity implements Serializable {
         return this.id == null;
     }
 
-
     public Long getId() {
         return id;
     }
